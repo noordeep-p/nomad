@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "type": "module",
   "scripts": {
     "start": "node index.js",
     "dev": "nodemon index.js"
@@ -11,11 +12,14 @@
   "license": "ISC",
   "dependencies": {
     "bcrypt": "^5.0.1",
+    "body-parser": "^1.19.1",
     "cors": "^2.8.5",
     "crypto": "^1.0.1",
     "dotenv": "^15.0.0",
     "express": "^4.17.2",
     "getstream": "^7.4.1",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^6.1.10",
     "nodemon": "^2.0.15",
     "stream-chat": "^5.4.0"
   }
