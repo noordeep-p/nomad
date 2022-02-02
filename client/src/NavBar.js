@@ -1,6 +1,6 @@
 // import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import "./App.css";
 import * as React from "react";
+import { Link } from "react-router-dom";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
@@ -25,6 +25,12 @@ export default function NavBar() {
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
         <Toolbar>
+          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+            <Link to="/" style={{ textDecoration: "none" }}>
+              Nomad
+            </Link>
+          </Typography>
+          <Button color="inherit">Login</Button>
           <IconButton
             size="large"
             edge="start"
@@ -52,17 +58,19 @@ export default function NavBar() {
                 }}
               >
                 <MenuItem onClick={handleClose}>Profile</MenuItem>
-                <MenuItem onClick={handleClose}>My Maps</MenuItem>
-                <MenuItem onClick={handleClose}>My Favourite Maps</MenuItem>
-                <MenuItem onClick={handleClose}>Create Maps</MenuItem>
+                <MenuItem onClick={handleClose}>
+                  <Link to="/mymaps">My Maps</Link>
+                </MenuItem>
+                <MenuItem onClick={handleClose}>
+                  <Link to="/favouritemaps">My Favourite Maps</Link>
+                </MenuItem>
+                <MenuItem onClick={handleClose}>
+                  <Link to="/favouritemaps">Create Map</Link>
+                </MenuItem>
                 <MenuItem onClick={handleClose}>Logout</MenuItem>
               </Menu>
             </div>
           </IconButton>
-          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-            Nomad
-          </Typography>
-          <Button color="inherit">Login</Button>
         </Toolbar>
       </AppBar>
     </Box>
