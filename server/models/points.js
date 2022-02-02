@@ -10,6 +10,6 @@ const pointSchema = mongoose.Schema({
   map: String,
 });
 
-const pointModel = mongoose.model('pointModel', pointSchema);
+const PointModel = mongoose.model('PointModel', pointSchema);
 
-export default pointModel;
+export default PointModel;
