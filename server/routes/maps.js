@@ -8,7 +8,7 @@ const router = express.Router();
 
 router.get('/', readMaps);
 router.post('/', createMaps);
-router.put('/', updateMaps);
-router.delete('/', deleteMaps);
+router.patch('/:id', updateMaps);
+router.delete('/:id', deleteMaps);
 
 export default router;
