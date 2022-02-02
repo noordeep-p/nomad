@@ -1,15 +1,20 @@
-export const createMaps = (req, res) => {
-  res.send("hello world");
+import MapModel from '../models/maps.js';
+
+export const createMaps = async (req, res) => {
+  const map = req.body;
+  const newMap = new MapModel(map);
+  try {
+    await newMap.save();
+  } catch (error) {
+    res.status(404).json({ message: error.message });
+  }
 };
 
-export const readMaps = (req, res) => {
-  res.send("hello world");
-};
-
-export const updateMaps = (req, res) => {
-  res.send("hello world");
-};
-
-export const deleteMaps = (req, res) => {
-  res.send("hello world");
+export const readMaps = async (req, res) => {
+  try {
+    const allMaps = await MapModel.find();
+    res.status(200).json(allMaps);
+  } catch (error) {
+    res.status(404).json({ message: error.message });
+  }
 };
