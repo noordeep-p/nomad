@@ -8,7 +8,7 @@ const router = express.Router();
 
 router.get('/', readPoints);
 router.post('/', createPoints);
-router.put('/', updatePoints);
-router.delete('/', deletePoints);
+router.patch('/:id', updatePoints);
+router.delete('/:id', deletePoints);
 
 export default router;
