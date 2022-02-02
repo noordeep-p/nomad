@@ -6,7 +6,7 @@ import dotenv from "dotenv";
 
 import userRoutes from "./routes/user.js";
 import mapRoutes from "./routes/maps.js";
-import pointRoutes from "./routes/maps.js";
+import pointRoutes from "./routes/points.js";
 
 const app = express();
 
@@ -18,7 +18,7 @@ dotenv.config();
 
 const PORT = process.env.PORT || 3000;
 
-app.use("/", userRoutes);
+app.use("/user", userRoutes);
 app.use("/maps", mapRoutes);
 app.use("/points", pointRoutes);
 
