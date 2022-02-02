@@ -1,9 +1,12 @@
-import mongoose from "mongoose";
+import mongoose from 'mongoose';
 
 const mapSchema = mongoose.Schema({
-  name: String
+  name: String,
+  description: String,
+  creator: String,
+  image_url: String,
 });
 
-const mapModel = mongoose.model("mapModel", mapSchema);
+const MapModel = mongoose.model('MapModel', mapSchema);
 
-export default mapModel;
+export default MapModel;
