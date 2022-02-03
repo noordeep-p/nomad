@@ -1,3 +1,4 @@
+// Import dependencies and routes
 import express from 'express';
 import bodyParser from 'body-parser';
 import mongoose from 'mongoose';
@@ -8,6 +9,7 @@ import userRoutes from './routes/user.js';
 import mapRoutes from './routes/maps.js';
 import pointRoutes from './routes/points.js';
 
+// Middleware
 const app = express();
 
 app.use(bodyParser.json({ extended: true }));
@@ -18,10 +20,12 @@ dotenv.config();
 
 const PORT = process.env.PORT || 3000;
 
+// Routes
 app.use('/user', userRoutes);
 app.use('/maps', mapRoutes);
 app.use('/points', pointRoutes);
 
+// Connect to db
 mongoose
   .connect(process.env.CONNECTION_URL, {
     useNewURLParser: true,
