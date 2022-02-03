@@ -26,7 +26,7 @@ export default function NavBar() {
       <AppBar position="static">
         <Toolbar>
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-            <Link to="/" style={{ textDecoration: "none" }}>
+            <Link to="/" className="link__header">
               Nomad
             </Link>
           </Typography>
@@ -46,7 +46,7 @@ export default function NavBar() {
                 aria-expanded={open ? "true" : undefined}
                 onClick={handleClick}
               >
-                <MenuIcon />
+                <MenuIcon sx={{ fill: "white" }} />
               </Button>
               <Menu
                 id="basic-menu"
@@ -59,13 +59,19 @@ export default function NavBar() {
               >
                 <MenuItem onClick={handleClose}>Profile</MenuItem>
                 <MenuItem onClick={handleClose}>
-                  <Link to="/mymaps">My Maps</Link>
+                  <Link to="/mymaps" className="link">
+                    My Maps
+                  </Link>
                 </MenuItem>
                 <MenuItem onClick={handleClose}>
-                  <Link to="/favouritemaps">My Favourite Maps</Link>
+                  <Link to="/favouritemaps" className="link">
+                    My Favourite Maps
+                  </Link>
                 </MenuItem>
                 <MenuItem onClick={handleClose}>
-                  <Link to="/favouritemaps">Create Map</Link>
+                  <Link to="/newmap" className="link">
+                    Create Map
+                  </Link>
                 </MenuItem>
                 <MenuItem onClick={handleClose}>Logout</MenuItem>
               </Menu>

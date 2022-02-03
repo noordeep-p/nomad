@@ -1,0 +1,24 @@
+.myStyle {
+  height: 100vh;
+  top: 0;
+  left: 0;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-image: url("../public/Images/Background.jpg");
+};
+
+.link {
+  text-decoration: none;
+  color: black ;
+
+  &__header{
+    text-decoration: none;
+    color: white
+  }
+}
+
+.header {
+  color: black;
+
+}
+

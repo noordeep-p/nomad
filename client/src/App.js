@@ -9,7 +9,6 @@ export default function App() {
   return (
     <Router>
       <NavBar />
-      <HomePage />
       <Switch>
         <Route exact path="/mymaps">
           <MyMaps />

@@ -1,6 +1,12 @@
+import "./style.scss";
+
 export default function HomePage() {
-  const myStyle = {
-    backgroundImage: "url(Images/Background.jpg)",
-  };
-  return <div style={myStyle}>Hello</div>;
+  return (
+    <div className="myStyle">
+      <h1 className="header">
+        Find and share your itenaries and visited places with others around the
+        world!
+      </h1>
+    </div>
+  );
 }
