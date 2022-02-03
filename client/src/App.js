@@ -3,6 +3,7 @@ import HomePage from "./HomePage";
 import MyMaps from "./MyMaps";
 import NewMap from "./NewMap";
 import FavouriteMaps from "./FavouriteMaps";
+import Map from "./Map";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 export default function App() {
@@ -18,6 +19,9 @@ export default function App() {
         </Route>
         <Route exact path="/newmap">
           <NewMap />
+        </Route>
+        <Route exact path="/map">
+          <Map />
         </Route>
         <Route exact path="/">
           <HomePage />
