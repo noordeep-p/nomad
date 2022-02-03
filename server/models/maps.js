@@ -1,10 +1,26 @@
 import mongoose from 'mongoose';
 
 const mapSchema = mongoose.Schema({
-  name: String,
-  description: String,
-  creator: String,
-  image_url: String,
+  username: {
+    type: String,
+    required: true,
+  },
+  title: {
+    type: String,
+    required: true,
+  },
+  desc: {
+    type: String,
+    required: true,
+  },
+  image_url: {
+    type: Number,
+    required: true,
+  },
+  points: [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'PointModel',
+  }],
 });
 
 const MapModel = mongoose.model('MapModel', mapSchema);
