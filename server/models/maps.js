@@ -9,12 +9,12 @@ const mapSchema = mongoose.Schema({
     type: String,
     required: true,
   },
-  desc: {
+  description: {
     type: String,
     required: true,
   },
   image_url: {
-    type: Number,
+    type: String,
     required: true,
   },
   points: [{
