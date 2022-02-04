@@ -1,10 +1,11 @@
-import NavBar from "./NavBar";
-import HomePage from "./HomePage";
-import MyMaps from "./MyMaps";
-import NewMap from "./NewMap";
-import FavouriteMaps from "./FavouriteMaps";
-import Map from "./Map";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import React from 'react';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import NavBar from './NavBar';
+import HomePage from './HomePage';
+import MyMaps from './MyMaps';
+import NewMap from './NewMap';
+import FavoriteMaps from './FavoriteMaps';
+import Map from './Map';
 
 export default function App() {
   return (
@@ -14,8 +15,8 @@ export default function App() {
         <Route exact path="/mymaps">
           <MyMaps />
         </Route>
-        <Route exact path="/favouritemaps">
-          <FavouriteMaps />
+        <Route exact path="/favoritemaps">
+          <FavoriteMaps />
         </Route>
         <Route exact path="/newmap">
           <NewMap />
