@@ -14,17 +14,25 @@ export const readUser = async (req, res) => {
 };
 
 export const createUser = async (req, res) => {
-  const user = req.body;
-  const newUser = new UserModel(user);
+  const { username, email, password } = req.body;
   try {
-    if (!user.username || !user.email || !user.password) {
+    if (!username || !email || !password) {
       return res.status(400).json({msg: 'Please enter all fields'})
     }
 
-    const existingUser = await UserModel.findOne( { "email": user.email } )
+    const existingUser = await UserModel.findOne( { email } )
     if(existingUser) {
       return res.status(400).json({msg: 'This email is already used'})
     }
+
+    const salt = await bcrypt.genSalt()
+    const passwordHash = await bcrypt.hash(password, salt)
+    const newUser = new UserModel({
+      username,
+      email,
+      password: passwordHash
+    }
+    );
 
     await newUser.save();
     res.status(201).json(newUser);
