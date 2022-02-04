@@ -19,7 +19,7 @@ export const readUser = async (req, res) => {
 
 export const login = async (req, res) => {
   try {
-    const { username, email, password } = req.body
+    const { username, password } = req.body
     if (!username || !password) {
       return res.status(400).json({ msg: 'Please enter all fields' })
     }
@@ -71,3 +71,23 @@ export const createUser = async (req, res) => {
     res.status(500).json({ message: error });
   }
 };
+
+function authenticateToken(req, res, next) {
+  try{
+    const authHeader = req.headers['authorization']
+    const token = authHeader && authHeader.split(' ')[1]
+    if(!token){
+     return res.status(401).json({ msg: 'Access denied, token required'})
+    }  
+    
+    const verified = jwt.verify(token, process.env.ACCESS_TOKEN_SECRET)
+    if (!verified){
+      return res.status(403).json({ msg: 'Access denied, incorrect token'})
+    } 
+    req.user = verified.user
+    next()
+  
+  } catch (error) {
+    res.status(500).json({ message: error });
+  }
+}
