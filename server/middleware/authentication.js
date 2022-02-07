@@ -9,12 +9,12 @@ export default function authenticateToken(req, res, next) {
     const authHeader = req.headers.authorization;
     const token = authHeader && authHeader.split(' ')[1];
     if (!token) {
-      return res.status(401).json({ msg: 'Authorization denied - token required' });
+      return res.status(403).json({ msg: 'Authorization denied' });
     }
 
     const verified = jwt.verify(token, process.env.ACCESS_TOKEN_SECRET);
     if (!verified) {
-      return res.status(403).json({ msg: 'Authorization denied - incorrect token' });
+      return res.status(403).json({ msg: 'Authorization denied' });
     }
     req.user = verified.user;
     next();
