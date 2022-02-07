@@ -1,9 +1,9 @@
 import mongoose from 'mongoose';
 
 const mapSchema = mongoose.Schema({
-  username: {
-    type: String,
-    required: true,
+  owner: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'UserModel',
   },
   title: {
     type: String,
