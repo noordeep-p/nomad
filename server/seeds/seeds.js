@@ -3,8 +3,19 @@ import dotenv from 'dotenv';
 import UserModel from '../models/users.js';
 import MapModel from '../models/maps.js';
 import PointModel from '../models/points.js';
+import { generateMaps, getMapIds } from './mapSeeds.js';
+import { generateUsers, getUserIds } from './userSeeds.js';
+import { generatePoints, getPointIds } from './pointSeeds.js';
 
-dotenv.config({ path: '../.env' });
+const pointIds = getPointIds();
+const userIds = getUserIds();
+const mapIds = getMapIds();
+
+const userSeeds = generateUsers(userIds);
+const pointSeeds = generatePoints(pointIds, mapIds);
+const mapSeeds = generateMaps(mapIds, userIds, pointIds);
+
+dotenv.config({ path: '../.env.local' });
 
 mongoose
   .connect(process.env.CONNECTION_URL, {
@@ -18,23 +29,13 @@ mongoose
     console.log(e.message);
   });
 
-const seedUsers = [{ username: 'john', email: 'example@example.com', password: 'password' }];
-const seedMaps = [{
-  username: 'john', title: '5 star restaurants I visited in Toronto', description: '5 star restaurants I visited in Toronto', image_url: 'https://tinyurl.com/47mwc4tt',
-}];
-const seedPoints = [{
-  name: 'Ricks Good Eats', description: '5 star indian eatery', image_url: 'https://tinyurl.com/47mwc4tt', address: 'example_address', lat: 43.6488, lon: -79.6870,
-}, {
-  name: 'Casa Loam', description: 'good for a fancy night out', image_url: 'https://tinyurl.com/47mwc4tt', address: 'example_address', lat: 43.6780, lon: -79.4094,
-}];
-
 Promise.all([
   UserModel.collection.drop(),
   PointModel.collection.drop(),
   MapModel.collection.drop(),
-  UserModel.insertMany(seedUsers),
-  PointModel.insertMany(seedPoints),
-  MapModel.insertMany(seedMaps),
+  UserModel.insertMany(userSeeds),
+  PointModel.insertMany(pointSeeds),
+  MapModel.insertMany(mapSeeds),
 ]).then(() => {
   mongoose.connection.close();
   console.log('Successfully seeded DB');
