@@ -17,7 +17,7 @@ app.use(bodyParser.json({ extended: true }));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors());
 
-dotenv.config();
+dotenv.config({ path: './.env.local' });
 
 const PORT = process.env.PORT || 3000;
 
