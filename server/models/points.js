@@ -31,7 +31,6 @@ const pointSchema = mongoose.Schema(
       ref: 'MapModel',
     },
   },
-  { timestamps: true },
 );
 
 const PointModel = mongoose.model('PointModel', pointSchema);
