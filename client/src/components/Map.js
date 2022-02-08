@@ -1,12 +1,11 @@
-/* eslint-disable no-unused-vars */
 import React from 'react';
 import {
-  Paper,
-  Typography,
-  useMediaQuery,
+  // Paper,
+  // Typography,
+  // useMediaQuery,
   CssBaseline,
   Grid,
-} from '@material-ui/core';
+} from '@mui/material/';
 import GoogleMapReact from 'google-map-react';
 
 import MapDetails from './MapDetails';

@@ -6,6 +6,8 @@ import MyMaps from './MyMaps';
 import NewMap from './NewMap';
 import FavoriteMaps from './FavoriteMaps';
 import Map from './Map';
+import Login from './Login';
+import Register from './Register';
 
 export default function App() {
   return (
@@ -23,6 +25,12 @@ export default function App() {
         </Route>
         <Route exact path="/map">
           <Map />
+        </Route>
+        <Route exact path="/login">
+          <Login />
+        </Route>
+        <Route exact path="/register">
+          <Register />
         </Route>
         <Route exact path="/">
           <HomePage />
