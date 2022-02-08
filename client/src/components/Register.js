@@ -1,4 +1,5 @@
 import * as React from 'react';
+import axios from 'axios';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -17,12 +18,16 @@ export default function SignUp() {
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    // eslint-disable-next-line no-console
-    console.log({
-      username: data.get('username'),
-      email: data.get('email'),
-      password: data.get('password'),
-    });
+    console.log('data', data.get('username'));
+    axios
+      .post('http://localhost:8000/user/create', {
+        username: data.get('username'),
+        email: data.get('email'),
+        password: data.get('password'),
+      })
+      .then((res) => {
+        console.log(res);
+      });
   };
 
   return (

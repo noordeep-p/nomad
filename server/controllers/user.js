@@ -17,13 +17,14 @@ export const readUser = async (req, res) => {
 };
 
 export const login = async (req, res) => {
+  console.log(req.body)
   try {
-    const { username, password } = req.body;
-    if (!username || !password) {
+    const { email, password } = req.body;
+    if (!email || !password) {
       return res.status(400).json({ msg: 'Please enter all fields' });
     }
 
-    const user = await UserModel.findOne({ username });
+    const user = await UserModel.findOne({ email });
     if (!user) {
       return res.status(400).json({ msg: 'Account has not been registered' });
     }
@@ -43,6 +44,7 @@ export const login = async (req, res) => {
 
 export const createUser = async (req, res) => {
   const { username, email, password } = req.body;
+  console.log(req.body)
   try {
     if (!username || !email || !password) {
       return res.status(400).json({ msg: 'Please enter all fields' });
