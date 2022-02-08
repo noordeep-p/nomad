@@ -30,7 +30,22 @@ export default function NavBar() {
               Nomad
             </Link>
           </Typography>
-          <Button color="inherit">Login</Button>
+          <Button
+            component={Link}
+            to="/login"
+            variant="contained"
+            color="primary"
+          >
+            Login
+          </Button>
+          <Button
+            component={Link}
+            to="/register"
+            variant="contained"
+            color="primary"
+          >
+            Register
+          </Button>
           <IconButton
             size="large"
             edge="start"
