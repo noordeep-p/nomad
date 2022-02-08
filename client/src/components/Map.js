@@ -1,4 +1,6 @@
-/* eslint-disable no-unused-vars */
+import React from 'react';
+// import { Paper, Typography, useMediaQuery } from '@material-ui/core';
+import GoogleMapReact from 'google-map-react';
 
 export default function Map() {
   const coords = { lat: 0, lng: 0 };
