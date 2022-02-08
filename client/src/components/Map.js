@@ -16,16 +16,17 @@ export default function Map() {
   return (
     <div className="mapContainer">
       <CssBaseline>
-        <Grid container spacing={3} style={{ width: '100%' }}>
-          <Grid item xs={12} md={4}>
+        <Grid container spacing={1} style={{ width: '100%' }}>
+          <Grid item xs={12} md={3}>
             <MapDetails />
           </Grid>
           <Grid
             item
             xs={12}
-            md={8}
+            md={9}
             style={{
               display: 'flex',
+              height: '100vh',
               justifyContent: 'center',
               alignItems: 'center',
             }}

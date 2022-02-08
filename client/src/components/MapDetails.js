@@ -9,13 +9,13 @@ export default function MapDetails() {
   return (
     <Card
       sx={{
-        maxWidth: 345,
+        maxWidth: 500,
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
       }}
     >
-      <CardMedia component="img" alt="map1" height="140" image={mapsample} />
+      <CardMedia component="img" alt="map1" height="300" image={mapsample} />
       <CardContent>
         <Typography gutterBottom variant="h5" component="div">
           Place
