@@ -64,7 +64,7 @@ export default function NavBar() {
                   </Link>
                 </MenuItem>
                 <MenuItem onClick={handleClose}>
-                  <Link to="/favouritemaps" className="link">
+                  <Link to="/favoritemaps" className="link">
                     My Favourite Maps
                   </Link>
                 </MenuItem>
