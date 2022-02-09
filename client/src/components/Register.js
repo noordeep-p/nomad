@@ -18,7 +18,6 @@ export default function SignUp() {
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    console.log('data', data.get('username'));
     axios
       .post('http://localhost:8000/user/create', {
         username: data.get('username'),
