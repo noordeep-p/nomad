@@ -1,15 +1,19 @@
+/* eslint-disable jsx-a11y/alt-text */
+/* eslint-disable array-callback-return */
 /* eslint-disable no-underscore-dangle */
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { CssBaseline, Grid } from '@mui/material/';
+import {
+  CssBaseline, Grid,
+} from '@mui/material/';
 import GoogleMapReact from 'google-map-react';
 
 import PointDetails from './PointDetails';
+import Marker from './Marker';
 
 export default function Map() {
-  const coords = { lat: 0, lng: 0 };
-
   const [points, setPoints] = useState([]);
+  const [coords, setCoords] = useState({});
 
   useEffect(() => {
     const data = async () => {
@@ -17,6 +21,12 @@ export default function Map() {
       setPoints(response.data);
     };
     data().catch(console.error);
+  }, []);
+
+  useEffect(() => {
+    navigator.geolocation.getCurrentPosition(({ coords: { latitude, longitude } }) => {
+      setCoords({ lat: latitude, lng: longitude });
+    });
   }, []);
 
   const renderPoint = () => points.map((point) => (
@@ -53,13 +63,31 @@ export default function Map() {
               }}
               defaultCenter={coords}
               center={coords}
-              defaultZoom={14}
+              defaultZoom={4}
               margin={[50, 50, 50, 50]}
               options={{
                 disableDefaultUI: true,
                 zoomControl: true,
               }}
-            />
+              onChange={(e) => {
+                setCoords({ lat: e.center.lat, lng: e.center.lng });
+              }}
+            >
+              {points && points.map((point) => (
+                <Marker
+                  lat={point.lat}
+                  lng={point.lon}
+                />
+              ))}
+              {/* <Marker
+                style={{ cursor: 'pointer' }}
+                title="test"
+                lat={49.205409}
+                lng={-123.099639}
+                name="My Marker" */}
+              {/* /> */}
+
+            </GoogleMapReact>
           </Grid>
         </Grid>
       </div>
