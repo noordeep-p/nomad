@@ -1,11 +1,8 @@
 import React from 'react';
 import { StreamChat } from 'stream-chat';
 import { Chat } from 'stream-chat-react';
-import dotenv from 'dotenv';
 
 import { ChannelContainer, ChannelListContainer } from './Chat/index';
-
-dotenv.config({ path: './../../.env.local' });
 
 const apiKey = process.env.REACT_APP_STREAM_CHAT_API_KEY;
 const client = StreamChat.getInstance(apiKey);
