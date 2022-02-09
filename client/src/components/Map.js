@@ -1,3 +1,4 @@
+/* eslint-disable no-underscore-dangle */
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { CssBaseline, Grid } from '@mui/material/';
@@ -9,16 +10,23 @@ export default function Map() {
   const coords = { lat: 0, lng: 0 };
 
   const [points, setPoints] = useState([]);
-  console.log(points);
 
   useEffect(() => {
-    axios.get('http://localhost:8000/points').then((data) => {
-      setPoints(data.data);
-    });
+    const data = async () => {
+      const response = await axios.get('http://localhost:8000/points');
+      setPoints(response.data);
+    };
+    data().catch(console.error);
   }, []);
+
   const renderPoint = () => points.map((point) => (
     <Grid item xs={12} md={12}>
-      <PointDetails point={point} />
+      <PointDetails
+        key={point._id}
+        image={point.image_url}
+        address={point.address}
+        description={point.description}
+      />
     </Grid>
   ));
 
@@ -30,7 +38,7 @@ export default function Map() {
           <Grid
             item
             xs={12}
-            md={12}
+            md={9}
             style={{
               display: 'flex',
               flex: '1 1 70%',
