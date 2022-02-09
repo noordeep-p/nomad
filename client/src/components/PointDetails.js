@@ -5,7 +5,8 @@ import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import mapsample from '../Images/mapsample.png';
 
-export default function MapDetails() {
+export default function PointDetails({ point }) {
+  console.log('Point', point);
   return (
     <Card
       sx={{
