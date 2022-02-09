@@ -8,6 +8,7 @@ import FavoriteMaps from './FavoriteMaps';
 import Map from './Map';
 import Login from './Login';
 import Register from './Register';
+import Chat from './Chat';
 import useLocalStorage from '../hooks/useLocalStorage';
 
 export default function App() {
@@ -27,6 +28,9 @@ export default function App() {
         </Route>
         <Route exact path="/map">
           <Map />
+        </Route>
+        <Route exact path="/chat">
+          <Chat />
         </Route>
         <Route exact path="/login">
           <Login setAccessToken={setAccessToken} />
