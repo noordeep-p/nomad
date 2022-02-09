@@ -27,3 +27,12 @@
   width: 100%;
 }
 
+.pointContaier{
+  display: flex
+}
+.pointRatio{
+  height: 100vh;
+  justify-content: center;
+  flex: 1 1 30%;
+  overflow: scroll;
+}

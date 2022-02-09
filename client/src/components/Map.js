@@ -8,36 +8,32 @@ import PointDetails from './PointDetails';
 export default function Map() {
   const coords = { lat: 0, lng: 0 };
 
-  const [points, setPoints] = useState('');
+  const [points, setPoints] = useState([]);
+  console.log(points);
 
   useEffect(() => {
     axios.get('http://localhost:8000/points').then((data) => {
       setPoints(data.data);
     });
   }, []);
-  const renderPoint = () => {
-    return (
-      points &&
-      points.map((point) => {
-        return (
-          <Grid item xs={12} md={3}>
-            <PointDetails point={point} />
-          </Grid>
-        );
-      })
-    );
-  };
+  const renderPoint = () => points.map((point) => (
+    <Grid item xs={12} md={12}>
+      <PointDetails point={point} />
+    </Grid>
+  ));
+
   return (
-    <div className="mapContainer">
-      <CssBaseline>
+    <CssBaseline>
+      <div className="pointContainer">
         <Grid container spacing={1} style={{ width: '100%' }}>
-          <PointDetails />
+          <div className="pointRatio">{renderPoint()}</div>
           <Grid
             item
             xs={12}
-            md={9}
+            md={12}
             style={{
               display: 'flex',
+              flex: '1 1 70%',
               height: '100vh',
               justifyContent: 'center',
               alignItems: 'center',
@@ -55,12 +51,10 @@ export default function Map() {
                 disableDefaultUI: true,
                 zoomControl: true,
               }}
-              // onChange={''}
-              // onChildClick={''}
             />
           </Grid>
         </Grid>
-      </CssBaseline>
-    </div>
+      </div>
+    </CssBaseline>
   );
 }
