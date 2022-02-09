@@ -79,14 +79,6 @@ export default function Map() {
                   lng={point.lon}
                 />
               ))}
-              {/* <Marker
-                style={{ cursor: 'pointer' }}
-                title="test"
-                lat={49.205409}
-                lng={-123.099639}
-                name="My Marker" */}
-              {/* /> */}
-
             </GoogleMapReact>
           </Grid>
         </Grid>
