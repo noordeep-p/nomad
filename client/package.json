@@ -20,8 +20,7 @@
     "react-scripts": "5.0.0",
     "sass": "^1.49.7",
     "stream-chat": "^5.5.0",
-    "stream-chat-react": "^6.12.2",
-    "web-vitals": "^2.1.4"
+    "stream-chat-react": "^6.12.2"
   },
   "scripts": {
     "start": "react-scripts start",

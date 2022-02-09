@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import axios from 'axios';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
@@ -11,10 +11,12 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { useHistory } from 'react-router-dom';
 
 const theme = createTheme();
 
-export default function SignIn() {
+export default function SignIn({ setAccessToken }) {
+  const history = useHistory();
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
@@ -24,7 +26,12 @@ export default function SignIn() {
         password: data.get('password'),
       })
       .then((res) => {
-        console.log(res);
+        const { accessToken } = res.data;
+        if (accessToken) {
+          setAccessToken(`Bearer ${accessToken}`);
+          history.push('/');
+        }
+        console.log('Login failed!');
       });
   };
 

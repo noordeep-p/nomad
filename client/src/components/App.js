@@ -8,11 +8,14 @@ import FavoriteMaps from './FavoriteMaps';
 import Map from './Map';
 import Login from './Login';
 import Register from './Register';
+import Chat from './Chat';
+import useLocalStorage from '../hooks/useLocalStorage';
 
 export default function App() {
+  const [accessToken, setAccessToken] = useLocalStorage('accessToken', '');
   return (
     <Router>
-      <NavBar />
+      <NavBar accessToken={accessToken} setAccessToken={setAccessToken} />
       <Switch>
         <Route exact path="/mymaps">
           <MyMaps />
@@ -26,8 +29,11 @@ export default function App() {
         <Route exact path="/map">
           <Map />
         </Route>
+        <Route exact path="/chat">
+          <Chat />
+        </Route>
         <Route exact path="/login">
-          <Login />
+          <Login setAccessToken={setAccessToken} />
         </Route>
         <Route exact path="/register">
           <Register />
