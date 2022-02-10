@@ -4,33 +4,33 @@
   left: 0;
   background-repeat: no-repeat;
   background-size: cover;
-  background-image: url("./Images/Background.jpg");
-};
+  background-image: url('./Images/Background.jpg');
+}
 
 .link {
   text-decoration: none;
-  color: black ;
+  color: black;
 
-  &__header{
+  &__header {
     text-decoration: none;
-    color: white
+    color: white;
   }
 }
 
 .header {
   color: black;
-  margin-top: 0
+  margin-top: 0;
 }
 
-.mapContainer{
+.mapContainer {
   height: 85vh;
   width: 100%;
 }
 
-.pointContaier{
-  display: flex
+.pointContainer {
+  display: flex;
 }
-.pointRatio{
+.pointRatio {
   height: 100vh;
   justify-content: center;
   flex: 1 1 30%;

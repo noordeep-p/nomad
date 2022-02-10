@@ -15,7 +15,7 @@ const userSeeds = generateUsers(userIds);
 const pointSeeds = generatePoints(pointIds, mapIds);
 const mapSeeds = generateMaps(mapIds, userIds, pointIds);
 
-dotenv.config({ path: '../.env.local' });
+dotenv.config({ path: './.env.local' });
 
 mongoose
   .connect(process.env.CONNECTION_URL, {

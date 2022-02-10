@@ -11,10 +11,12 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { useHistory } from 'react-router-dom';
 
 const theme = createTheme();
 
 export default function SignUp() {
+  const history = useHistory();
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
@@ -25,7 +27,12 @@ export default function SignUp() {
         password: data.get('password'),
       })
       .then((res) => {
-        console.log(res);
+        if (res) {
+          history.push('/login');
+        }
+      })
+      .catch((err) => {
+        console.error(err);
       });
   };
 

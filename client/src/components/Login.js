@@ -31,7 +31,9 @@ export default function SignIn({ setAccessToken }) {
           setAccessToken(`Bearer ${accessToken}`);
           history.push('/');
         }
-        console.log('Login failed!');
+      })
+      .catch((err) => {
+        console.error(err);
       });
   };
 
