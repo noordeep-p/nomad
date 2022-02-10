@@ -16,6 +16,7 @@ import { useHistory } from 'react-router-dom';
 const theme = createTheme();
 
 export default function SignUp() {
+  const history = useHistory();
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
@@ -27,7 +28,7 @@ export default function SignUp() {
       })
       .then((res) => {
         if (res) {
-          useHistory.push('/login');
+          history.push('/login');
         }
       })
       .catch((err) => {

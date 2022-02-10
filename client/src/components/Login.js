@@ -16,6 +16,7 @@ import { useHistory } from 'react-router-dom';
 const theme = createTheme();
 
 export default function SignIn({ setAccessToken }) {
+  const history = useHistory();
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
@@ -28,7 +29,7 @@ export default function SignIn({ setAccessToken }) {
         const { accessToken } = res.data;
         if (accessToken) {
           setAccessToken(`Bearer ${accessToken}`);
-          useHistory.push('/');
+          history.push('/');
         }
       })
       .catch((err) => {

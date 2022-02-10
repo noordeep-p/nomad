@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
@@ -11,6 +11,7 @@ import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 
 export default function NavBar({ accessToken, setAccessToken }) {
+  const history = useHistory();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
   const handleClick = (event) => {
@@ -34,6 +35,7 @@ export default function NavBar({ accessToken, setAccessToken }) {
               <Button
                 onClick={() => {
                   setAccessToken('');
+                  history.push('/');
                 }}
                 variant="contained"
                 color="primary"
