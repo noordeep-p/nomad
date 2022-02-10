@@ -2,7 +2,7 @@
 import express from 'express';
 
 import {
-  readUser, createUser, login, readUserAllMap, createUserMap,
+  readUser, createUser, login, readUserAllMap, createUserMap, readUserSingleMap,
 } from '../controllers/user.js';
 
 const router = express.Router();
@@ -11,7 +11,7 @@ router.get('/:username', readUser);
 router.post('/login', login);
 router.post('/create', createUser);
 router.get('/:id/maps', readUserAllMap);
-router.post('/:username/maps', createUserMap);
-// router.get('/:username/maps/:mapid', readUserSingleMap);
+router.post('/:id/maps', createUserMap);
+router.get('/:username/maps/:mapId', readUserSingleMap);
 
 export default router;

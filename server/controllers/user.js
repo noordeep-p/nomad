@@ -66,17 +66,16 @@ export const createUser = async (req, res) => {
 export const readUserAllMap = async (req, res) => {
   const { id } = req.params;
   const Id = mongoose.Types.ObjectId(id);
-  console.log(req.params);
   const userMaps = await MapModel.find({ owner: Id });
   res.status(201).json(userMaps);
 };
 
-// export const readUserSingleMap = (req, res) => {
-//   const { username, id: _id } = req.params;
-//   const allMaps = await MapModel.find({ username });
-//   res.status(201).json(allMaps);
-
-// };
+export const readUserSingleMap = async (req, res) => {
+  const { mapId } = req.params;
+  console.log({ mapId });
+  const map = await MapModel.find({ _id: mapId });
+  res.status(201).json(map);
+};
 
 export const createUserMap = async (req, res) => {
   const map = req.body;
