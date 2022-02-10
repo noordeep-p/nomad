@@ -3,15 +3,15 @@
 /* eslint-disable no-underscore-dangle */
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import {
-  CssBaseline, Grid,
-} from '@mui/material/';
+
+import { CssBaseline, Grid } from '@mui/material/';
 import GoogleMapReact from 'google-map-react';
 
 import PointDetails from './PointDetails';
 import Marker from './Marker';
 
-export default function Map() {
+export default function Map({ accessToken }) {
+  axios.defaults.headers.common = { Authorization: `${accessToken}` };
   const [points, setPoints] = useState([]);
   const [coords, setCoords] = useState({});
 
@@ -24,9 +24,11 @@ export default function Map() {
   }, []);
 
   useEffect(() => {
-    navigator.geolocation.getCurrentPosition(({ coords: { latitude, longitude } }) => {
-      setCoords({ lat: latitude, lng: longitude });
-    });
+    navigator.geolocation.getCurrentPosition(
+      ({ coords: { latitude, longitude } }) => {
+        setCoords({ lat: latitude, lng: longitude });
+      },
+    );
   }, []);
 
   const renderPoint = () => points.map((point) => (
@@ -73,12 +75,10 @@ export default function Map() {
                 setCoords({ lat: e.center.lat, lng: e.center.lng });
               }}
             >
-              {points && points.map((point) => (
-                <Marker
-                  lat={point.lat}
-                  lng={point.lon}
-                />
-              ))}
+              {points
+                && points.map((point) => (
+                  <Marker lat={point.lat} lng={point.lon} />
+                ))}
             </GoogleMapReact>
           </Grid>
         </Grid>
