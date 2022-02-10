@@ -11,13 +11,14 @@ import GoogleMapReact from 'google-map-react';
 import PointDetails from './PointDetails';
 import Marker from './Marker';
 
-export default function Map() {
+export default function Map({ accessToken }) {
   const [points, setPoints] = useState([]);
   const [coords, setCoords] = useState({});
 
   useEffect(() => {
     const data = async () => {
-      const response = await axios.get('http://localhost:8000/points');
+      const response = await axios.get('http://localhost:8000/points', { headers: accessToken });
+      console.log('test=========', response.data);
       setPoints(response.data);
     };
     data().catch(console.error);
