@@ -45,7 +45,6 @@ export const deleteMaps = async (req, res) => {
 export const readMapAllPoint = async (req, res) => {
   try {
     const { id } = req.params;
-    console.log({ id });
     const allPoint = await PointModel.find({ map: id });
     res.status(200).json(allPoint);
   } catch (error) {
@@ -61,6 +60,16 @@ export const createMapPoint = async (req, res) => {
     await newPoint.save();
     await MapModel.findOneAndUpdate(newPoint.map, { $push: { points: newPoint._id } }, { new: true });
     res.status(201).json(newPoint);
+  } catch (error) {
+    res.status(404).json({ message: error.message });
+  }
+};
+
+export const readMapSinglePoint = async (req, res) => {
+  try {
+    const { pointId } = req.params;
+    const point = await PointModel.find({ _id: pointId });
+    res.status(200).json(point);
   } catch (error) {
     res.status(404).json({ message: error.message });
   }

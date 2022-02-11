@@ -2,7 +2,6 @@
 import bcrypt from 'bcrypt';
 import dotenv from 'dotenv';
 import jwt from 'jsonwebtoken';
-// import mongoose from 'mongoose';
 import UserModel from '../models/users.js';
 import MapModel from '../models/maps.js';
 
@@ -67,7 +66,6 @@ export const createUser = async (req, res) => {
 export const readUserAllMap = async (req, res) => {
   try {
     const { id } = req.params;
-    // const Id = mongoose.Types.ObjectId(id);
     const userMaps = await MapModel.find({ owner: id });
     res.status(201).json(userMaps);
   } catch (error) {
@@ -78,7 +76,6 @@ export const readUserAllMap = async (req, res) => {
 export const readUserSingleMap = async (req, res) => {
   try {
     const { mapId } = req.params;
-    console.log({ mapId });
     const map = await MapModel.find({ _id: mapId });
     res.status(201).json(map);
   } catch (error) {
