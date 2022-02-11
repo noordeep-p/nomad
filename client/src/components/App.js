@@ -8,7 +8,6 @@ import FavoriteMaps from './FavoriteMaps';
 import Map from './Map';
 import Login from './Login';
 import Register from './Register';
-import Chat from './Chat/Chat';
 import useLocalStorage from '../hooks/useLocalStorage';
 
 export default function App() {
