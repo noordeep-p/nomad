@@ -13,5 +13,8 @@ router.get('/:id/:mapId', readUserSingleMap);
 router.post('/login', login);
 router.post('/create', createUser);
 router.post('/:id/maps', createUserMap);
+// router.patch('/:id/:mapId', updateUserSingleMap);
+// router.delete('/:id/maps', deleteUserAllMap);
+// router.delete('/:id/:mapId', deleteUserSingleMap);
 
 export default router;

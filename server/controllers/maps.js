@@ -1,10 +1,10 @@
 /* eslint-disable max-len */
 /* eslint-disable no-underscore-dangle */
-// import mongoose from 'mongoose';
+import mongoose from 'mongoose';
 import MapModel from '../models/maps.js';
 import PointModel from '../models/points.js';
 
-const { mongoose } = 'mongoose';
+// const { mongoose } = 'mongoose';
 
 export const createMaps = async (req, res) => {
   const map = req.body;
@@ -67,10 +67,20 @@ export const createMapPoint = async (req, res) => {
 
 export const readMapSinglePoint = async (req, res) => {
   try {
-    const { pointId } = req.params;
-    const point = await PointModel.find({ _id: pointId });
+    const { pointId: _id } = req.params;
+    if (!mongoose.Types.ObjectId.isValid(_id)) return res.status(404).json({ message: 'This map does not contain this point' });
+    const point = await PointModel.find({ _id });
     res.status(200).json(point);
   } catch (error) {
     res.status(404).json({ message: error.message });
   }
+};
+
+export const updateMapSinglePoint = async (req, res) => {
+  const { pointId: _id } = req.params;
+  console.log({ _id });
+  const point = req.body;
+  if (!mongoose.Types.ObjectId.isValid(_id)) return res.status(404).json({ message: 'This map does not contain this point' });
+  const updatedMapSinglePoint = await PointModel.findByIdAndUpdate(_id, point, { new: true });
+  return res.status(201).json(updatedMapSinglePoint);
 };

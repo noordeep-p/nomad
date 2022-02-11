@@ -11,10 +11,7 @@ import PointDetails from './PointDetails';
 import Marker from './Marker';
 
 export default function Map({ accessToken }) {
-<<<<<<< HEAD
-=======
   axios.defaults.headers.common = { Authorization: `${accessToken}` };
->>>>>>> main
   const [points, setPoints] = useState([]);
   const [coords, setCoords] = useState({});
 
