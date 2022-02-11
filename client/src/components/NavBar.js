@@ -4,13 +4,20 @@ import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
-import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
-import MenuIcon from '@mui/icons-material/Menu';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
+import Logout from '@mui/icons-material/Logout';
+import {
+  Avatar, Badge, Divider, ListItemIcon, Tooltip,
+} from '@mui/material';
+import ModeOfTravelIcon from '@mui/icons-material/ModeOfTravel';
+import ChatIcon from '@mui/icons-material/Chat';
+
+import useStyles from '../styles';
 
 export default function NavBar({ accessToken, setAccessToken }) {
+  const styles = useStyles();
   const history = useHistory();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
@@ -22,91 +29,98 @@ export default function NavBar({ accessToken, setAccessToken }) {
   };
 
   return (
-    <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static">
-        <Toolbar>
-          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-            <Link to="/" className="link__header">
+    <AppBar position="static">
+      <Toolbar className={styles.toolbar}>
+        <div className={styles.logo}>
+          <ModeOfTravelIcon fontSize="large" />
+          <Typography variant="h5">
+            <Link to="/" className={styles.logoLink}>
               Nomad
             </Link>
           </Typography>
-          {accessToken ? (
-            <>
-              <Button
+        </div>
+        {accessToken ? (
+          <div className={styles.icon}>
+            <Box
+              sx={{
+                display: 'flex',
+                alignItems: 'center',
+                textAlign: 'center',
+              }}
+            >
+              <Badge badgeContent={4} color="secondary">
+                <ChatIcon />
+              </Badge>
+              <Tooltip title="Account settings">
+                <IconButton
+                  onClick={handleClick}
+                  size="small"
+                  sx={{ ml: 2 }}
+                  aria-controls={open ? 'account-menu' : undefined}
+                  aria-haspopup="true"
+                  aria-expanded={open ? 'true' : undefined}
+                >
+                  <Avatar sx={{ width: 32, height: 32 }}>M</Avatar>
+                </IconButton>
+              </Tooltip>
+            </Box>
+            <Menu
+              anchorEl={anchorEl}
+              id="account-menu"
+              open={open}
+              onClose={handleClose}
+              onClick={handleClose}
+              PaperProps={{
+                elevation: 0,
+                sx: {
+                  overflow: 'visible',
+                  filter: 'drop-shadow(0px 2px 8px rgba(0,0,0,0.32))',
+                  mt: 1.5,
+                  '& .MuiAvatar-root': {
+                    width: 32,
+                    height: 32,
+                    ml: -0.5,
+                    mr: 1,
+                  },
+                  '&:before': {
+                    content: '""',
+                    display: 'block',
+                    position: 'absolute',
+                    top: 0,
+                    right: 14,
+                    width: 10,
+                    height: 10,
+                    bgcolor: 'background.paper',
+                    transform: 'translateY(-50%) rotate(45deg)',
+                    zIndex: 0,
+                  },
+                },
+              }}
+              transformOrigin={{ horizontal: 'right', vertical: 'top' }}
+              anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
+            >
+              <MenuItem>
+                <Avatar />
+                Profile Settings
+              </MenuItem>
+              <Divider />
+              <MenuItem
                 onClick={() => {
                   setAccessToken('');
                   history.push('/');
                 }}
-                variant="contained"
-                color="primary"
               >
+                <ListItemIcon>
+                  <Logout fontSize="small" />
+                </ListItemIcon>
                 Logout
-              </Button>
-              <Button
-                id="basic-button"
-                aria-controls={open ? 'basic-menu' : undefined}
-                aria-haspopup="true"
-                aria-expanded={open ? 'true' : undefined}
-                onClick={handleClick}
-              >
-                <MenuIcon sx={{ fill: 'white' }} />
-              </Button>
-              <Menu
-                id="basic-menu"
-                anchorEl={anchorEl}
-                open={open}
-                onClose={handleClose}
-                MenuListProps={{
-                  'aria-labelledby': 'basic-button',
-                }}
-              >
-                <MenuItem onClick={handleClose}>Profile</MenuItem>
-                <MenuItem onClick={handleClose}>
-                  <Link to="/mymaps" className="link">
-                    My Maps
-                  </Link>
-                </MenuItem>
-                <MenuItem onClick={handleClose}>
-                  <Link to="/favoritemaps" className="link">
-                    My Favourite Maps
-                  </Link>
-                </MenuItem>
-                <MenuItem onClick={handleClose}>
-                  <Link to="/newmap" className="link">
-                    Create Map
-                  </Link>
-                </MenuItem>
-              </Menu>
-            </>
-          ) : (
-            <>
-              <Button
-                component={Link}
-                to="/login"
-                variant="contained"
-                color="primary"
-              >
-                Login
-              </Button>
-              <Button
-                component={Link}
-                to="/register"
-                variant="contained"
-                color="primary"
-              >
-                Register
-              </Button>
-              <IconButton
-                size="large"
-                edge="start"
-                color="inherit"
-                aria-label="menu"
-                sx={{ mr: 2 }}
-              />
-            </>
-          )}
-        </Toolbar>
-      </AppBar>
-    </Box>
+              </MenuItem>
+            </Menu>
+          </div>
+        ) : (
+          ''
+        )}
+      </Toolbar>
+    </AppBar>
   );
 }

@@ -1,5 +1,3 @@
-/* eslint-disable jsx-a11y/alt-text */
-/* eslint-disable array-callback-return */
 /* eslint-disable no-underscore-dangle */
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
@@ -17,7 +15,9 @@ export default function Map({ accessToken }) {
 
   useEffect(() => {
     const data = async () => {
-      const response = await axios.get('http://localhost:8000/points', { headers: accessToken });
+      const response = await axios.get('http://localhost:8000/points', {
+        headers: accessToken,
+      });
       console.log('test=========', response.data);
       setPoints(response.data);
     };
