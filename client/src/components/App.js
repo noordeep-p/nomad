@@ -29,9 +29,6 @@ export default function App() {
         <Route exact path="/map">
           <Map accessToken={accessToken} />
         </Route>
-        <Route exact path="/chat">
-          <Chat />
-        </Route>
         <Route exact path="/login">
           <Login setAccessToken={setAccessToken} />
         </Route>
@@ -39,7 +36,7 @@ export default function App() {
           <Register />
         </Route>
         <Route exact path="/">
-          <HomePage />
+          <HomePage accessToken={accessToken} />
         </Route>
       </Switch>
     </Router>
