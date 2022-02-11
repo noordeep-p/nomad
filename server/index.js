@@ -24,7 +24,7 @@ const PORT = process.env.PORT || 3000;
 // Routes
 app.use('/user', userRoutes);
 app.use('/maps', authenticateToken, mapRoutes);
-app.use('/points', authenticateToken, pointRoutes);
+app.use('/points', pointRoutes);
 
 // Connect to db
 mongoose

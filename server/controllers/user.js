@@ -1,12 +1,15 @@
 import bcrypt from 'bcrypt';
 import dotenv from 'dotenv';
 import jwt from 'jsonwebtoken';
+import mongoose from 'mongoose';
 import UserModel from '../models/users.js';
+import MapModel from '../models/maps.js';
 
 dotenv.config({ path: '../.env.local' });
 
 export const readUser = async (req, res) => {
   const { username } = req.params;
+  console.log(req.params);
   try {
     const userFound = await UserModel.findOne({ username });
     return res.status(200).json(userFound);
@@ -57,5 +60,31 @@ export const createUser = async (req, res) => {
     return res.status(201).json(newUser);
   } catch (error) {
     return res.status(500).json({ message: error });
+  }
+};
+
+export const readUserAllMap = async (req, res) => {
+  const { id } = req.params;
+  const Id = mongoose.Types.ObjectId(id);
+  console.log(req.params);
+  const userMaps = await MapModel.find({ owner: Id });
+  res.status(201).json(userMaps);
+};
+
+// export const readUserSingleMap = (req, res) => {
+//   const { username, id: _id } = req.params;
+//   const allMaps = await MapModel.find({ username });
+//   res.status(201).json(allMaps);
+
+// };
+
+export const createUserMap = async (req, res) => {
+  const map = req.body;
+  const newMap = new MapModel(map);
+  try {
+    await newMap.save();
+    res.status(201).json(newMap);
+  } catch (error) {
+    res.status(404).json({ message: error.message });
   }
 };
