@@ -1,12 +1,11 @@
 import dotenv from 'dotenv';
 import jwt from 'jsonwebtoken';
 
-dotenv.config({ path: '../.env.local' });
+dotenv.config({ path: './.env.local' });
 
 export default function authenticateToken(req, res, next) {
   try {
-    const authHeader = req.headers;
-    console.log(authHeader);
+    const authHeader = req.headers.authorization;
     const token = authHeader && authHeader.split(' ')[1];
     if (!token) {
       return res.status(403).json({ msg: 'No JWT Token: Authorization denied' });
