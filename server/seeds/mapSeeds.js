@@ -29,7 +29,7 @@ function generateMaps(mapIds, userArr, pointArr) {
 
 function getMapIds() {
   const idArray = [];
-  for (let i = 0; i < 100; i += 1) {
+  for (let i = 0; i < 25; i += 1) {
     idArray.push(new mongoose.Types.ObjectId());
   }
   return idArray;
