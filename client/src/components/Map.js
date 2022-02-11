@@ -1,5 +1,3 @@
-/* eslint-disable jsx-a11y/alt-text */
-/* eslint-disable array-callback-return */
 /* eslint-disable no-underscore-dangle */
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
@@ -11,16 +9,15 @@ import PointDetails from './PointDetails';
 import Marker from './Marker';
 
 export default function Map({ accessToken }) {
-<<<<<<< HEAD
-=======
   axios.defaults.headers.common = { Authorization: `${accessToken}` };
->>>>>>> main
   const [points, setPoints] = useState([]);
   const [coords, setCoords] = useState({});
 
   useEffect(() => {
     const data = async () => {
-      const response = await axios.get('http://localhost:8000/points', { headers: accessToken });
+      const response = await axios.get('http://localhost:8000/points', {
+        headers: accessToken,
+      });
       console.log('test=========', response.data);
       setPoints(response.data);
     };
