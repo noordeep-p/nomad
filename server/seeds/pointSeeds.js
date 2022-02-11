@@ -30,7 +30,7 @@ function generatePoints(pointsArr, mapIds) {
 // Generate array of pointIds
 function getPointIds() {
   const idArray = [];
-  for (let i = 0; i < 300; i += 1) {
+  for (let i = 0; i < 100; i += 1) {
     idArray.push(new mongoose.Types.ObjectId());
   }
   return idArray;
