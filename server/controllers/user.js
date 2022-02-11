@@ -1,9 +1,7 @@
-/* eslint-disable consistent-return */
 import bcrypt from 'bcrypt';
 import dotenv from 'dotenv';
 import jwt from 'jsonwebtoken';
 import UserModel from '../models/users.js';
-import MapModel from '../models/maps.js';
 
 dotenv.config({ path: '../.env.local' });
 
@@ -63,9 +61,11 @@ export const createUser = async (req, res) => {
   }
 };
 
+/* move to maps route
 export const readUserAllMap = async (req, res) => {
   try {
     const { id } = req.params;
+    console.log(req.params);
     const userMaps = await MapModel.find({ owner: id });
     res.status(201).json(userMaps);
   } catch (error) {
@@ -82,14 +82,4 @@ export const readUserSingleMap = async (req, res) => {
     return res.status(500).json({ message: error });
   }
 };
-
-export const createUserMap = async (req, res) => {
-  const map = req.body;
-  const newMap = new MapModel(map);
-  try {
-    await newMap.save();
-    res.status(201).json(newMap);
-  } catch (error) {
-    res.status(404).json({ message: error.message });
-  }
-};
+*/

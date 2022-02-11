@@ -1,3 +1,4 @@
+/* eslint-disable consistent-return */
 /* eslint-disable max-len */
 /* eslint-disable no-underscore-dangle */
 import mongoose from 'mongoose';
@@ -16,23 +17,23 @@ export const readMaps = async (req, res) => {
   }
 };
 
-export const readMapSinglePoint = async (req, res) => {
-  try {
-    const { pointId: _id } = req.params;
-    if (!mongoose.Types.ObjectId.isValid(_id)) return res.status(404).json({ message: 'This map does not contain this point' });
-    const point = await PointModel.find({ _id });
-    res.status(200).json(point);
-  } catch (error) {
-    res.status(404).json({ message: error.message });
-  }
-};
-
 export const readSingleMap = async (req, res) => {
   const { id } = req.params;
   try {
     const map = await MapModel.find({ _id: id });
     console.log(map);
     res.status(200).json(map);
+  } catch (error) {
+    res.status(404).json({ message: error.message });
+  }
+};
+
+export const readMapSinglePoint = async (req, res) => {
+  try {
+    const { pointId: _id } = req.params;
+    if (!mongoose.Types.ObjectId.isValid(_id)) return res.status(404).json({ message: 'This map does not contain this point' });
+    const point = await PointModel.find({ _id });
+    res.status(200).json(point);
   } catch (error) {
     res.status(404).json({ message: error.message });
   }
@@ -100,5 +101,13 @@ export const deleteMapSinglePoint = async (req, res) => {
   if (!mongoose.Types.ObjectId.isValid(_id)) return res.status(404).json({ message: 'This map does not contain any point' });
   await PointModel.findByIdAndDelete(_id);
   await MapModel.findOneAndUpdate(_id, { $pull: { points: _id } }, { new: true });
+  return res.status(200).json({ message: 'Point deleted successfully' });
+};
+
+export const deleteMapAllPoint = async (req, res) => {
+  const { id: _id } = req.params;
+  if (!mongoose.Types.ObjectId.isValid(_id)) return res.status(404).json({ message: 'No map with that ID' });
+  await PointModel.findByIdAndDelete(_id);
+  await MapModel.findOneAndUpdate(_id, { $set: { points: [] } }, { new: true });
   return res.status(200).json({ message: 'Point deleted successfully' });
 };
