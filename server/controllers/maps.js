@@ -16,7 +16,6 @@ export const createMaps = async (req, res) => {
 export const readMaps = async (req, res) => {
   try {
     const allMaps = await MapModel.find();
-    console.log(allMaps);
     res.status(200).json(allMaps);
   } catch (error) {
     res.status(404).json({ message: error.message });
