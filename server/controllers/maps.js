@@ -1,4 +1,8 @@
+/* eslint-disable max-len */
+/* eslint-disable no-underscore-dangle */
+// import mongoose from 'mongoose';
 import MapModel from '../models/maps.js';
+import PointModel from '../models/points.js';
 
 const { mongoose } = 'mongoose';
 
@@ -36,4 +40,28 @@ export const deleteMaps = async (req, res) => {
   if (!mongoose.Types.ObjectId.isValid(_id)) return res.status(404).json({ message: 'No map with that ID' });
   await MapModel.findByIdAndDelete(_id);
   return res.status(200).json({ message: 'Map deleted successfully' });
+};
+
+export const readMapAllPoint = async (req, res) => {
+  try {
+    const { id } = req.params;
+    console.log({ id });
+    const allPoint = await PointModel.find({ map: id });
+    res.status(200).json(allPoint);
+  } catch (error) {
+    res.status(404).json({ message: error.message });
+  }
+};
+
+export const createMapPoint = async (req, res) => {
+  const point = req.body;
+  const newPoint = new PointModel(point);
+
+  try {
+    await newPoint.save();
+    await MapModel.findOneAndUpdate(newPoint.map, { $push: { points: newPoint._id } }, { new: true });
+    res.status(201).json(newPoint);
+  } catch (error) {
+    res.status(404).json({ message: error.message });
+  }
 };

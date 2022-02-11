@@ -8,10 +8,10 @@ import {
 const router = express.Router();
 
 router.get('/:username', readUser);
+router.get('/:id/maps', readUserAllMap);
+router.get('/:id/:mapId', readUserSingleMap);
 router.post('/login', login);
 router.post('/create', createUser);
-router.get('/:id/maps', readUserAllMap);
 router.post('/:id/maps', createUserMap);
-router.get('/:username/maps/:mapId', readUserSingleMap);
 
 export default router;

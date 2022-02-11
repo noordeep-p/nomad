@@ -1,7 +1,8 @@
+/* eslint-disable consistent-return */
 import bcrypt from 'bcrypt';
 import dotenv from 'dotenv';
 import jwt from 'jsonwebtoken';
-import mongoose from 'mongoose';
+// import mongoose from 'mongoose';
 import UserModel from '../models/users.js';
 import MapModel from '../models/maps.js';
 
@@ -64,17 +65,25 @@ export const createUser = async (req, res) => {
 };
 
 export const readUserAllMap = async (req, res) => {
-  const { id } = req.params;
-  const Id = mongoose.Types.ObjectId(id);
-  const userMaps = await MapModel.find({ owner: Id });
-  res.status(201).json(userMaps);
+  try {
+    const { id } = req.params;
+    // const Id = mongoose.Types.ObjectId(id);
+    const userMaps = await MapModel.find({ owner: id });
+    res.status(201).json(userMaps);
+  } catch (error) {
+    return res.status(500).json({ message: error });
+  }
 };
 
 export const readUserSingleMap = async (req, res) => {
-  const { mapId } = req.params;
-  console.log({ mapId });
-  const map = await MapModel.find({ _id: mapId });
-  res.status(201).json(map);
+  try {
+    const { mapId } = req.params;
+    console.log({ mapId });
+    const map = await MapModel.find({ _id: mapId });
+    res.status(201).json(map);
+  } catch (error) {
+    return res.status(500).json({ message: error });
+  }
 };
 
 export const createUserMap = async (req, res) => {
