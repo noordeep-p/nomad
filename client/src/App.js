@@ -7,6 +7,7 @@ import MainPage from './components/Content/MainPage';
 import MapCard from './components/Content/MapCard';
 import MapBox from './components/Map/MapBox';
 import MapList from './components/Map/MapList';
+import Chatroom from './components/Chat/Chatroom';
 // login and register page
 import UserAuth from './components/Content/UserAuth';
 
@@ -116,6 +117,9 @@ export default function App() {
         </Route>
         <Route exact path="/login">
           <UserAuth accessToken={accessToken} setAccessToken={setAccessToken} />
+        </Route>
+        <Route exact path="/chatroom">
+          <Chatroom setAccessToken={setAccessToken} />
         </Route>
         <Route exact path="/">
           <MainPage
