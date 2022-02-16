@@ -2,37 +2,34 @@ import mongoose from 'mongoose';
 
 const pointSchema = mongoose.Schema(
   {
+    photo: {
+      type: String,
+    },
     name: {
       type: String,
-      required: true,
     },
-    description: {
+    num_reviews: {
       type: String,
-      required: true,
-    },
-    image_url: {
-      type: String,
-      required: true,
     },
     address: {
       type: String,
-      required: true,
     },
-    lon: {
-      type: Number,
-      required: true,
+    website: {
+      type: String,
     },
-    lat: {
-      type: Number,
-      required: true,
+    ranking: {
+      type: String,
     },
-    map: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: 'MapModel',
+    rating: {
+      type: String,
+    },
+    latitude: {
+      type: String,
+    },
+    longitude: {
+      type: String,
     },
   },
 );
 
-const PointModel = mongoose.model('PointModel', pointSchema);
-
-export default PointModel;
+export default pointSchema;
