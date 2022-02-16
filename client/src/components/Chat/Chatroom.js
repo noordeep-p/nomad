@@ -1,16 +1,16 @@
 /* eslint-disable react/button-has-type */
 import React from 'react';
-// import Card from '@mui/material/Card';
-// import CardActions from '@mui/material/CardActions';
-// import CardContent from '@mui/material/CardContent';
-// import Typography from '@mui/material/Typography';
+import Card from '@mui/material/Card';
+import CardActions from '@mui/material/CardActions';
+import CardContent from '@mui/material/CardContent';
+import Typography from '@mui/material/Typography';
 
-import Convo from './Convo';
+// import Convo from './Convo';
 
 export default function Chatroom() {
   return (
     <div>
-      {/* <Card sx={{ width: '25%', height: '30vh' }}>
+      <Card sx={{ width: '25%', height: '30vh' }}>
         <CardContent>
           <Typography variant="h4" component="div">
             Start a Chat
@@ -24,8 +24,8 @@ export default function Chatroom() {
         <CardActions>
           <button variant="contained">Start Chat</button>
         </CardActions>
-      </Card> */}
-      <Convo />
+      </Card>
+      {/* <Convo /> */}
 
     </div>
   );

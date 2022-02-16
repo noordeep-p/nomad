@@ -34,7 +34,7 @@ export default function Convo() {
         <Divider />
         <Grid container style={{ top: 700, position: 'fixed', width: '100%' }}>
           <Grid item xs={9}>
-            <TextField id="outlined-basic" fullWidth />
+            <TextField id="outlined-basic" label="Enter Message" variant="outlined" fullWidth />
           </Grid>
           <Grid item xs={2}>
             <Button size="large" style={{ width: '60%' }} variant="contained">Send</Button>
