@@ -27,13 +27,12 @@ export default function MapDetails({ place, selected, refProp }) {
       photo: image,
       name: placeData.name,
       num_reviews: placeData.num_reviews,
-      cuisine: placeData.cuisine,
       address: placeData.address,
       website: placeData.website,
       ranking: placeData.ranking,
       rating: placeData.rating,
-      lat: placeData.latitude,
-      lng: placeData.longitude,
+      latitude: placeData.latitude,
+      longitude: placeData.longitude,
     };
     console.log(data);
   };
