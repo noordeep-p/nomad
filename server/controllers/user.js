@@ -37,7 +37,7 @@ export const login = async (req, res) => {
   }
 };
 
-export const createUser = async (req, res) => {
+export const register = async (req, res) => {
   const { username, email, password } = req.body;
   try {
     if (!username || !email || !password) {
@@ -60,26 +60,3 @@ export const createUser = async (req, res) => {
     return res.status(500).json({ message: error });
   }
 };
-
-/* move to maps route
-export const readUserAllMap = async (req, res) => {
-  try {
-    const { id } = req.params;
-    console.log(req.params);
-    const userMaps = await MapModel.find({ owner: id });
-    res.status(201).json(userMaps);
-  } catch (error) {
-    return res.status(500).json({ message: error });
-  }
-};
-
-export const readUserSingleMap = async (req, res) => {
-  try {
-    const { mapId } = req.params;
-    const map = await MapModel.find({ _id: mapId });
-    res.status(201).json(map);
-  } catch (error) {
-    return res.status(500).json({ message: error });
-  }
-};
-*/
