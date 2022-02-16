@@ -6,7 +6,6 @@ import React, { useEffect, useState } from 'react';
 import ScrollToBottom from 'react-scroll-to-bottom';
 import { css } from 'glamor';
 
-import { FixedSizeList } from 'react-window';
 import TextField from '@mui/material/TextField';
 import Typography from '@material-ui/core/Typography';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -83,7 +82,7 @@ export default function Convo({ socket, user, chatroom }) {
           </div>
         </ScrollToBottom>
         <Divider />
-        <Grid className="classes.messageButton" container style={{ top: 700, position: 'fixed', width: '100%' }}>
+        <Grid className="classes.messageButton" container style={{ top: 650, position: 'fixed', width: '100%' }}>
           <Grid className="classes.message" item xs={9}>
             <TextField id="outlined-basic" value={currentMessage} label="Enter Message" variant="outlined" onChange={(event) => { setCurrentMessage(event.target.value); }} onKeyPress={(event) => { event.key === 'Enter' && sendMessage(); }} fullWidth />
           </Grid>
