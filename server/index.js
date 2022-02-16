@@ -7,7 +7,6 @@ import dotenv from 'dotenv';
 
 import userRoutes from './routes/user.js';
 import mapRoutes from './routes/maps.js';
-import pointRoutes from './routes/points.js';
 import authenticateToken from './middleware/authentication.js';
 
 // Middleware
@@ -23,8 +22,7 @@ const PORT = process.env.PORT || 3000;
 
 // Routes
 app.use('/user', userRoutes);
-app.use('/maps', mapRoutes);
-app.use('/points', authenticateToken, pointRoutes);
+app.use('/maps', mapRoutes, authenticateToken);
 
 // Connect to db
 mongoose
