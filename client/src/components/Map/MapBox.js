@@ -49,7 +49,7 @@ export default function MapBox({
                 <Paper elevation={3} className={classes.paper}>
                   <Typography
                     className={classes.typography}
-                    variant="captiontext"
+                    variant="caption"
                     gutterBottom
                   >
                     {' '}
