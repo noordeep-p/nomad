@@ -4,7 +4,7 @@ const UserSchema = new mongoose.Schema(
   {
     username: {
       type: String,
-      require: true,
+      required: true,
       unique: true,
     },
     email: {
@@ -16,6 +16,9 @@ const UserSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    favorite_maps: [{
+      type: mongoose.Schema.Types.ObjectId,
+    }],
   },
 );
 
