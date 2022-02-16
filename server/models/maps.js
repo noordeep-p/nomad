@@ -1,4 +1,5 @@
 import mongoose from 'mongoose';
+import pointSchema from './points.js';
 
 const mapSchema = mongoose.Schema({
   owner: {
@@ -7,20 +8,11 @@ const mapSchema = mongoose.Schema({
   },
   title: {
     type: String,
-    required: true,
   },
   description: {
     type: String,
-    required: true,
   },
-  image_url: {
-    type: String,
-    required: true,
-  },
-  points: [{
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'PointModel',
-  }],
+  points: [pointSchema],
 });
 
 const MapModel = mongoose.model('MapModel', mapSchema);
