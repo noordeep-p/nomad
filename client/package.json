@@ -16,13 +16,17 @@
     "@testing-library/react": "^12.1.2",
     "@testing-library/user-event": "^13.5.0",
     "axios": "^0.22.0",
+    "glamor": "^2.20.40",
     "google-map-react": "^2.1.10",
     "prop-types": "^15.8.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-icons": "^4.2.0",
     "react-router-dom": "^5.3.0",
-    "react-scripts": "5.0.0"
+    "react-scripts": "5.0.0",
+    "react-scroll-to-bottom": "^4.2.0",
+    "react-window": "^1.8.6",
+    "socket.io-client": "^4.4.1"
   },
   "scripts": {
     "start": "react-scripts start",
