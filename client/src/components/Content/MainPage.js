@@ -122,7 +122,13 @@ export default function MainPage(props) {
               </ListItemIcon>
               <ListItemText primary={content.link3} />
             </ListItem>
-            <ListItem button key={content.link4}>
+            <ListItem
+              button
+              key={content.link4}
+              onClick={() => {
+                props.setAccessToken(null);
+              }}
+            >
               <ListItemIcon>
                 <LogoutIcon />
               </ListItemIcon>
@@ -152,7 +158,13 @@ export default function MainPage(props) {
               </ListItemIcon>
               <ListItemText primary={content.link3} />
             </ListItem>
-            <ListItem button key={content.link4}>
+            <ListItem
+              button
+              key={content.link4}
+              onClick={() => {
+                props.setAccessToken(null);
+              }}
+            >
               <ListItemIcon>
                 <LogoutIcon />
               </ListItemIcon>
