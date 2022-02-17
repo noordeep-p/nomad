@@ -12,6 +12,9 @@ const mapSchema = mongoose.Schema({
   description: {
     type: String,
   },
+  city: {
+    type: String,
+  },
   points: [pointSchema],
   favorites: {
     type: Array,
