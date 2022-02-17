@@ -130,7 +130,7 @@ export default function MainPage(props) {
               key={content.link4}
               onClick={() => {
                 props.setAccessToken(null);
-                localStorage.setItem('username', null);
+                localStorage.clear();
               }}
             >
               <ListItemIcon>
@@ -167,7 +167,7 @@ export default function MainPage(props) {
               key={content.link4}
               onClick={() => {
                 props.setAccessToken(null);
-                localStorage.setItem('username', null);
+                localStorage.clear();
               }}
             >
               <ListItemIcon>
