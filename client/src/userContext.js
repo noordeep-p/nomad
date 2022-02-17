@@ -1,3 +1,4 @@
+/* eslint-disable no-underscore-dangle */
 /* eslint-disable react/jsx-no-constructed-context-values */
 import React, { useContext, useState } from 'react';
 
@@ -19,6 +20,7 @@ export function UserContext({ children }) {
     if (data) {
       setUser(data.username);
       localStorage.setItem('username', data.username);
+      localStorage.setItem('userId', data._id);
     }
   }
 
