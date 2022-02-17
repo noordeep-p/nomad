@@ -14,13 +14,13 @@ import MapIndex from './components/Map/MapIndex';
 import useLocalStorage from './hooks/useLocalStorage';
 
 export default function App() {
-  const [accessToken, setAccessToken] = useLocalStorage('accessToken', '');
+  const [accessToken, setAccessToken] = useLocalStorage('accessToken', null);
 
   return (
     <Router>
       <Switch>
         <Route exact path="/login">
-          <UserAuth accessToken={accessToken} setAccessToken={setAccessToken} />
+          <UserAuth setAccessToken={setAccessToken} />
         </Route>
         <Route exact path="/">
           {accessToken ? (
