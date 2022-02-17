@@ -1,4 +1,5 @@
 import * as React from 'react';
+import axios from 'axios';
 import Backdrop from '@mui/material/Backdrop';
 import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
@@ -21,6 +22,7 @@ const style = {
 };
 
 export default function NewMapModal() {
+  const currentUserId = localStorage.getItem('userId');
   const history = useHistory();
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
@@ -29,8 +31,22 @@ export default function NewMapModal() {
   const handleNewMap = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    console.log(data.get('title'), data.get('description'), data.get('city'));
-    history.push('/map');
+    axios
+      .post('http://localhost:8000/maps', {
+        owner: currentUserId,
+        title: data.get('title'),
+        description: data.get('description'),
+        city: data.get('city'),
+      })
+      .then((res) => {
+        if (res) {
+          console.log(res);
+          history.push('/map');
+        }
+      })
+      .catch((err) => {
+        console.error(err);
+      });
   };
 
   return (
