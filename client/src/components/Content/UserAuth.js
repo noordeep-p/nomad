@@ -15,6 +15,7 @@ import Container from '@mui/material/Container';
 import CircularProgress from '@mui/material/CircularProgress';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { userUpdate } from '../../userContext';
 
 import {
   changeDisplay,
@@ -25,6 +26,7 @@ import {
 const theme = createTheme();
 
 export default function UserAuth({ setAccessToken }) {
+  const createUser = userUpdate();
   const history = useHistory();
   const [display, setDisplay] = React.useState('login');
 
@@ -104,7 +106,7 @@ export default function UserAuth({ setAccessToken }) {
               <Box
                 component="form"
                 noValidate
-                onSubmit={(event) => handleSubmitLogin(event, setAccessToken, history)}
+                onSubmit={(event) => handleSubmitLogin(event, setAccessToken, createUser, history)}
                 sx={{ mt: 1 }}
               >
                 <TextField
