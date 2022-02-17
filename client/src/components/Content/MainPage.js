@@ -1,7 +1,7 @@
 /* eslint-disable react/destructuring-assignment */
 /* eslint-disable react/jsx-no-useless-fragment */
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React from 'react';
+import React, { useState } from 'react';
 
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -24,12 +24,13 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 
 import NewMapModal from './NewMapModal';
+import ChatContainer from '../Chat/ChatContainer';
 
 import useStyles from './StylesMain';
 
 export default function MainPage(props) {
   const classes = useStyles();
-
+  const [mode, setMode] = useState('map');
   const content = {
     link1: 'Explore',
     link2: 'Your Favorites',
@@ -53,6 +54,10 @@ export default function MainPage(props) {
     }
 
     setState({ ...state, open });
+  };
+
+  const visualMode = (type) => {
+    setMode(type);
   };
 
   return (
@@ -107,19 +112,37 @@ export default function MainPage(props) {
         <Toolbar />
         <div className={classes.drawerContainer}>
           <List>
-            <ListItem button key={content.link1}>
+            <ListItem
+              button
+              key={content.link1}
+              onClick={() => {
+                visualMode('map');
+              }}
+            >
               <ListItemIcon>
                 <LocationOnIcon />
               </ListItemIcon>
               <ListItemText primary={content.link1} />
             </ListItem>
-            <ListItem button key={content.link2}>
+            <ListItem
+              button
+              key={content.link2}
+              onClick={() => {
+                visualMode('favorite');
+              }}
+            >
               <ListItemIcon>
                 <FavoriteIcon />
               </ListItemIcon>
               <ListItemText primary={content.link2} />
             </ListItem>
-            <ListItem button key={content.link3}>
+            <ListItem
+              button
+              key={content.link3}
+              onClick={() => {
+                visualMode('chat');
+              }}
+            >
               <ListItemIcon>
                 <ChatIcon />
               </ListItemIcon>
@@ -144,19 +167,37 @@ export default function MainPage(props) {
       <Drawer anchor="left" open={state.open} onClose={toggleDrawer(false)}>
         <div className={classes.drawerContainer}>
           <List>
-            <ListItem button key={content.link1}>
+            <ListItem
+              button
+              key={content.link1}
+              onClick={() => {
+                visualMode('map');
+              }}
+            >
               <ListItemIcon>
                 <LocationOnIcon />
               </ListItemIcon>
               <ListItemText primary={content.link1} />
             </ListItem>
-            <ListItem button key={content.link2}>
+            <ListItem
+              button
+              key={content.link2}
+              onClick={() => {
+                visualMode('favorite');
+              }}
+            >
               <ListItemIcon>
                 <FavoriteIcon />
               </ListItemIcon>
               <ListItemText primary={content.link2} />
             </ListItem>
-            <ListItem button key={content.link3}>
+            <ListItem
+              button
+              key={content.link3}
+              onClick={() => {
+                visualMode('chat');
+              }}
+            >
               <ListItemIcon>
                 <ChatIcon />
               </ListItemIcon>
@@ -181,9 +222,9 @@ export default function MainPage(props) {
       <main className={classes.content}>
         <Toolbar />
         <div>
-          {buckets.main.map((component) => (
-            <>{component}</>
-          ))}
+          {mode === 'map' && buckets.main.map((component) => <>{component}</>)}
+          {mode === 'favorite' && buckets.main.map((component) => <>{component}</>)}
+          {mode === 'chat' && (<ChatContainer />)}
         </div>
       </main>
     </div>
