@@ -29,7 +29,7 @@ export default function MapFilters({
       <AppBar position="fixed" className={classes.appBar}>
         <Toolbar>
           <Link
-            href="/map"
+            href="/"
             variant="h5"
             color="inherit"
             underline="none"
@@ -40,7 +40,7 @@ export default function MapFilters({
             Nomad
           </Link>
           <Link
-            href="/map"
+            href="/"
             variant="h5"
             color="inherit"
             underline="none"
