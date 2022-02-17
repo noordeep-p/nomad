@@ -4,7 +4,7 @@ export const handleSubmitRegister = (event, setDisplay) => {
   event.preventDefault();
   const data = new FormData(event.currentTarget);
   axios
-    .post('http://localhost:8000/user/create', {
+    .post('http://localhost:8000/user/register', {
       username: data.get('username'),
       email: data.get('email'),
       password: data.get('password'),
