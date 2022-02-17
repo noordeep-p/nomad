@@ -16,9 +16,6 @@ const UserSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    favorite_maps: [{
-      type: mongoose.Schema.Types.ObjectId,
-    }],
   },
 );
 
