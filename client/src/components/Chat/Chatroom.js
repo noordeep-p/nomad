@@ -13,7 +13,7 @@ import io from 'socket.io-client';
 
 import Convo from './Convo';
 
-const socket = io.connect('http://localhost:5000/');
+const socket = io.connect('http://localhost:4000/');
 
 export default function Chatroom() {
   const [user, setUser] = useState('');
