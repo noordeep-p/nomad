@@ -25,6 +25,7 @@ export default function App() {
         <Route exact path="/">
           {accessToken ? (
             <MainPage
+              setAccessToken={setAccessToken}
               bucketMain={[
                 <MapCard
                   content={{
