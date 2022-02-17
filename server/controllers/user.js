@@ -31,7 +31,7 @@ export const login = async (req, res) => {
       return res.status(400).json({ msg: 'Invalid password' });
     }
     const accessToken = jwt.sign({ user }, process.env.ACCESS_TOKEN_SECRET);
-    return res.json({ accessToken });
+    return res.json({ accessToken, user });
   } catch (error) {
     return res.status(404).json({ message: error });
   }
