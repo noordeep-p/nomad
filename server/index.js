@@ -5,6 +5,8 @@ import mongoose from 'mongoose';
 import cors from 'cors';
 import dotenv from 'dotenv';
 
+import chatroomRoutes from './routes/chatroom.js';
+import messageRoutes from './routes/message.js';
 import userRoutes from './routes/user.js';
 import mapRoutes from './routes/maps.js';
 import authenticateToken from './middleware/authentication.js';
@@ -22,7 +24,11 @@ const PORT = process.env.PORT || 3000;
 
 // Routes
 app.use('/user', userRoutes);
+
+// Protected Routes
 app.use('/maps', mapRoutes, authenticateToken);
+app.use('/chatroom', chatroomRoutes, authenticateToken);
+app.use('/message', messageRoutes, authenticateToken);
 
 // Connect to db
 mongoose
