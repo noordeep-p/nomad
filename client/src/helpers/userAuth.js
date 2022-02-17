@@ -19,7 +19,12 @@ export const handleSubmitRegister = (event, setDisplay) => {
     });
 };
 
-export const handleSubmitLogin = (event, setAccessToken, history) => {
+export const handleSubmitLogin = (
+  event,
+  setAccessToken,
+  createUser,
+  history,
+) => {
   event.preventDefault();
   const data = new FormData(event.currentTarget);
   axios
@@ -28,10 +33,13 @@ export const handleSubmitLogin = (event, setAccessToken, history) => {
       password: data.get('password'),
     })
     .then((res) => {
-      const { accessToken } = res.data;
+      const { accessToken, user } = res.data;
       if (accessToken) {
         setAccessToken(`Bearer ${accessToken}`);
         history.push('/');
+      }
+      if (user) {
+        createUser(user);
       }
     })
     .catch((err) => {
