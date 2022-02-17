@@ -23,6 +23,8 @@ import ChatIcon from '@mui/icons-material/Chat';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 
+import NewMapModal from './NewMapModal';
+
 import useStyles from './StylesMain';
 
 export default function MainPage(props) {
@@ -88,6 +90,7 @@ export default function MainPage(props) {
             {' '}
             Nomad
           </Link>
+          <NewMapModal />
           <div className={classes.search}>
             <div className={classes.searchIcon}>
               <SearchIcon />
