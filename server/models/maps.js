@@ -13,6 +13,10 @@ const mapSchema = mongoose.Schema({
     type: String,
   },
   points: [pointSchema],
+  favorites: {
+    type: Array,
+    default: [],
+  },
 });
 
 const MapModel = mongoose.model('MapModel', mapSchema);
