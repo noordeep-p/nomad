@@ -14,8 +14,10 @@ import Avatar from '@material-ui/core/Avatar';
 import { Typography, TextField, Button } from '@material-ui/core';
 import ScrollToBottom from 'react-scroll-to-bottom';
 import { css } from 'glamor';
-
+import TimeAgo from 'timeago-react';
 import useStyles from './chatStyles';
+
+import NewChatModal from './NewChatModal';
 
 const currentUser = localStorage.getItem('username');
 const currentUserID = localStorage.getItem('userID');
@@ -102,6 +104,9 @@ function ChatContainer() {
           <ListItem button key="Profile">
             <Typography align="center">Chatrooms</Typography>
           </ListItem>
+          <ListItem align="center">
+            <NewChatModal />
+          </ListItem>
           <List>
             {chatrooms.map((chat) => (
               <ListItem button key={chat._id}>
@@ -125,19 +130,20 @@ function ChatContainer() {
           <List className={classes.messageArea}>
             <ScrollToBottom className={ROOT_CSS}>
               <div style={{ height: 300, width: '100%' }}>
-                <List className="classes.messageBox">
+                <List>
                   {messagesHistory.map((msg) => (
                     <ListItem key={msg._id}>
-                      <Grid container>
+                      <Grid container className={classes.msgContainer}>
                         <Grid item xs={12}>
-                          <ListItemText align="right" primary={msg.text} />
+                          <ListItemText
+                            className={classes.chatBubble}
+                            align="right"
+                            primary={msg.text}
+                          />
                         </Grid>
                         <Grid item xs={12}>
                           <ListItemText align="right" secondary={msg.sender} />
-                          <ListItemText
-                            align="right"
-                            secondary={msg.timestamp}
-                          />
+                          <TimeAgo align="right" datetime={msg.createdAt} />
                         </Grid>
                       </Grid>
                     </ListItem>
