@@ -53,9 +53,10 @@ export default function MapFilters({
           <Typography variant="body1">Search Filters :</Typography>
           <div>
             <FormControl variant="standard" sx={{ m: 1, minWidth: 120 }}>
-              <InputLabel id="type">Type</InputLabel>
+              <InputLabel style={{ color: 'white' }} id="type">Type</InputLabel>
               <Select
                 id="type"
+                style={{ color: 'white' }}
                 value={type}
                 onChange={(event) => setType(event.target.value)}
               >
@@ -65,7 +66,7 @@ export default function MapFilters({
               </Select>
             </FormControl>
             <FormControl variant="standard" sx={{ m: 1, minWidth: 120 }}>
-              <InputLabel id="rating">Rating</InputLabel>
+              <InputLabel style={{ color: 'white' }} id="rating">Rating</InputLabel>
               <Select
                 id="rating"
                 value={rating}

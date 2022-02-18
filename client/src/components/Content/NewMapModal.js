@@ -51,7 +51,7 @@ export default function NewMapModal() {
 
   return (
     <div>
-      <Button onClick={handleOpen}>New Shared Itinerary</Button>
+      <Button style={{ color: 'white' }} onClick={handleOpen}>New Shared Itinerary</Button>
       <Modal
         aria-labelledby="transition-modal-title"
         aria-describedby="transition-modal-description"
