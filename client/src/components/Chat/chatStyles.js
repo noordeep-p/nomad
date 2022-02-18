@@ -1,47 +1,21 @@
 import { makeStyles } from '@material-ui/core/styles';
 
 export default makeStyles(() => ({
-  chatBody: {
-    width: '85%',
-    height: 600,
+  table: {
+    minWidth: 650,
   },
-  chatWindow: {
+  chatSection: {
     width: '100%',
-    height: '100vh',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
+    height: '90vh',
   },
-  messageBox: {
-    height: 300,
-    width: '100%',
+  headBG: {
+    backgroundColor: '#e0e0e0',
   },
-  messageButton: {
-    flexGrow: 0,
-    flexBasis: 0,
-    width: '10%',
+  borderRight500: {
+    borderRight: '1px solid #e0e0e0',
   },
-  message: {
-    flexGrow: 0,
-    flexBasis: 0,
-    // width: '90%',
-  },
-  listItemRight: {
-    backgroundColor: '#deeaee',
-    flex: 'none',
-    padding: '10px',
-    borderRadius: '10px',
-  },
-  listItemLeft: {
-    backgroundColor: '#f0f0f0',
-    flex: 'none',
-    padding: '10px',
-    borderRadius: '10px',
-  },
-  listItemRightContianer: {
-    justifyContent: 'flex-end',
-  },
-  listItemLeftContianer: {
-    justifyContent: 'flex-start',
+  messageArea: {
+    height: '75vh',
+    overflowY: 'auto',
   },
 }));
