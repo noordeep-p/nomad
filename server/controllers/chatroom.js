@@ -23,12 +23,9 @@ export const getChatroomsWithUser = async (req, res) => {
   }
 };
 
-export const getAllChatroomMembers = async (req, res) => {
-  const { membersArr } = req.body;
+export const getAllChatrooms = async (req, res) => {
   try {
-    const chatrooms = await ChatroomModel.findOne({
-      members: { $all: membersArr },
-    });
+    const chatrooms = await ChatroomModel.find();
     res.status(200).json(chatrooms);
   } catch (err) {
     res.status(500).json(err);
