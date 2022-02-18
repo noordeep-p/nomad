@@ -24,7 +24,7 @@ function ChatContainer() {
   // all chat styling
   const classes = useStyles();
   const ROOT_CSS = css({
-    height: 600,
+    height: '70vh',
     width: '100%',
   });
 
