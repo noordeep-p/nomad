@@ -13,6 +13,7 @@ import Select from '@mui/material/Select';
 import { Typography } from '@material-ui/core';
 
 import useStyles from '../Content/StylesMain';
+import '../../style.css';
 
 export default function MapFilters({
   type,
@@ -79,7 +80,10 @@ export default function MapFilters({
               </Select>
             </FormControl>
           </div>
-          <Autocomplete onLoad={onLoad} onPlaceChanged={onPlaceChanged}>
+          <Autocomplete
+            onLoad={onLoad}
+            onPlaceChanged={onPlaceChanged}
+          >
             <div className={classes.search}>
               <div className={classes.searchIcon}>
                 <SearchIcon />
