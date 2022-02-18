@@ -8,7 +8,6 @@ import {
 import MainPage from './components/Content/MainPage';
 import MapCard from './components/Content/MapCard';
 import UserAuth from './components/Content/UserAuth';
-import Chatroom from './components/Chat/Chatroom';
 import MapIndex from './components/Map/MapIndex';
 
 import useLocalStorage from './hooks/useLocalStorage';
@@ -45,13 +44,6 @@ export default function App() {
           <Route exact path="/map">
             {accessToken ? (
               <MapIndex currentUser={currentUser} />
-            ) : (
-              <Redirect to="/login" />
-            )}
-          </Route>
-          <Route exact path="/chatroom">
-            {accessToken ? (
-              <Chatroom currentUser={currentUser} />
             ) : (
               <Redirect to="/login" />
             )}
