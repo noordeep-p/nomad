@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-/* eslint-disable react/no-unescaped-entities */
+/* eslint-disable no-underscore-dangle */
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { makeStyles } from '@material-ui/core/styles';
@@ -11,39 +11,39 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import Avatar from '@material-ui/core/Avatar';
-import { Typography, TextField } from '@material-ui/core';
-import io from 'socket.io-client';
-import Fab from '@material-ui/core/Fab';
-import SendIcon from '@material-ui/icons/Send';
+import { Typography, TextField, Button } from '@material-ui/core';
+import ScrollToBottom from 'react-scroll-to-bottom';
+import { css } from 'glamor';
 
-const socket = io.connect('http://localhost:4000/');
+import useStyles from './chatStyles';
 
-const useStyles = makeStyles({
-  table: {
-    minWidth: 650,
-  },
-  chatSection: {
-    width: '100%',
-    height: '90vh',
-  },
-  headBG: {
-    backgroundColor: '#e0e0e0',
-  },
-  borderRight500: {
-    borderRight: '1px solid #e0e0e0',
-  },
-  messageArea: {
-    height: '75vh',
-    overflowY: 'auto',
-  },
-});
 const currentUser = localStorage.getItem('username');
 const currentUserID = localStorage.getItem('userID');
 
 function ChatContainer() {
   const classes = useStyles();
+  const ROOT_CSS = css({
+    height: 600,
+    width: '100%',
+  });
+
   const [user] = useState(currentUser);
-  const [chatroom, setChatRoom] = useState([]);
+  const [chatrooms, setChatRoom] = useState([]);
+  const [messagesHistory, setMessagesHistory] = useState([]);
+  const [currentMessage, setCurrentMessage] = useState('');
+  const [currentRoom, setCurrentRoom] = useState('');
+
+  const handleSendMessage = async () => {
+    if (currentMessage) {
+      const messageInput = {
+        sender: user,
+        text: currentMessage,
+      };
+      console.log(messageInput);
+      setMessagesHistory((message) => [...message, messageInput]);
+      setCurrentMessage('');
+    }
+  };
 
   useEffect(() => {
     axios
@@ -78,10 +78,10 @@ function ChatContainer() {
             <Typography align="center">Chatrooms</Typography>
           </ListItem>
           <List>
-            {chatroom.map((chat) => (
+            {chatrooms.map((chat) => (
               <ListItem
                 button
-                key={chat.name}
+                key={chat._id}
                 onClick={(e) => {
                   setChatRoom(e.target.value);
                 }}
@@ -96,16 +96,28 @@ function ChatContainer() {
         </Grid>
         <Grid item xs={9}>
           <List className={classes.messageArea}>
-            <ListItem key="1">
-              <Grid container>
-                <Grid item xs={12}>
-                  <ListItemText align="right" primary="Hey man, What's up ?" />
-                </Grid>
-                <Grid item xs={12}>
-                  <ListItemText align="right" secondary="09:30" />
-                </Grid>
-              </Grid>
-            </ListItem>
+            <ScrollToBottom className={ROOT_CSS}>
+              <div style={{ height: 300, width: '100%' }}>
+                <List className="classes.messageBox">
+                  {messagesHistory.map((msg) => (
+                    <ListItem key={msg._id}>
+                      <Grid container>
+                        <Grid item xs={12}>
+                          <ListItemText align="right" primary={msg.text} />
+                        </Grid>
+                        <Grid item xs={12}>
+                          <ListItemText align="right" secondary={msg.sender} />
+                          <ListItemText
+                            align="right"
+                            secondary={msg.timestamp}
+                          />
+                        </Grid>
+                      </Grid>
+                    </ListItem>
+                  ))}
+                </List>
+              </div>
+            </ScrollToBottom>
           </List>
           <Divider />
           <Grid container style={{ padding: '20px' }}>
@@ -113,13 +125,23 @@ function ChatContainer() {
               <TextField
                 id="outlined-basic-email"
                 label="Type Something"
+                value={currentMessage}
+                onChange={(event) => {
+                  setCurrentMessage(event.target.value);
+                }}
+                onKeyPress={(event) => event.key === 'Enter' && handleSendMessage()}
                 fullWidth
               />
             </Grid>
             <Grid xs={1} align="right">
-              <Fab color="primary" aria-label="add">
-                <SendIcon />
-              </Fab>
+              <Button
+                size="large"
+                style={{ width: '60%' }}
+                variant="contained"
+                onClick={handleSendMessage}
+              >
+                Send
+              </Button>
             </Grid>
           </Grid>
         </Grid>
