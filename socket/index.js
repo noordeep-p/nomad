@@ -1,26 +1,15 @@
-const express = require("express");
-const http = require("http");
-const app = express();
-const cors = require("cors");
-const server = http.createServer(app);
-const { Server } = require("socket.io");
-app.use(cors());
-
-
-const PORT = 4000 || process.env.PORT;
-
-const io = new Server(server, {
+const io = require("socket.io")(4000, {
   cors: {
-    origin: PORT,
-  }
+    origin: "http://localhost:3000",
+  },
 });
 
-io.on('connection', socket => {
-  console.log('New Connection...');
+io.on("connection", (socket) => {
+  console.log("New Connection...");
 
-  socket.emit('message', 'Welcome!');
+  socket.emit("message", "Welcome!");
 
-  socket.broadcast.emit('message', 'user joined');
+  socket.broadcast.emit("message", "user joined");
 
   socket.on("join_chat", (data) => {
     socket.join(data);
@@ -33,8 +22,4 @@ io.on('connection', socket => {
   socket.on("disconnect", () => {
     console.log(`${socket.id} disconnected`);
   });
-});
-
-server.listen(PORT, () => {
-  console.log(`Server Running on ${PORT}`);
 });
