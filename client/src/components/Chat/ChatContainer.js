@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-underscore-dangle */
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
@@ -21,30 +21,43 @@ const currentUser = localStorage.getItem('username');
 const currentUserID = localStorage.getItem('userID');
 
 function ChatContainer() {
+  // all chat styling
   const classes = useStyles();
   const ROOT_CSS = css({
     height: 600,
     width: '100%',
   });
 
+  // all chatrooms hooks
   const [user] = useState(currentUser);
   const [chatrooms, setChatRoom] = useState([]);
+  const [currentRoomID, setCurrentRoomID] = useState('');
+
+  // all message box hooks
   const [messagesHistory, setMessagesHistory] = useState([]);
   const [currentMessage, setCurrentMessage] = useState('');
-  const [currentRoom, setCurrentRoom] = useState('');
 
-  const handleSendMessage = async () => {
+  // all messages helper functions
+  const handleSendMessage = () => {
     if (currentMessage) {
       const messageInput = {
+        chatroomId: currentRoomID,
         sender: user,
         text: currentMessage,
       };
-      console.log(messageInput);
-      setMessagesHistory((message) => [...message, messageInput]);
-      setCurrentMessage('');
+      axios
+        .post('http://localhost:8000/message', messageInput)
+        .then((res) => {
+          if (res) {
+            setMessagesHistory((message) => [...message, messageInput]);
+            setCurrentMessage('');
+          }
+        })
+        .catch((e) => console.error(e));
     }
   };
 
+  // all db calls for chatrooms
   useEffect(() => {
     axios
       .get('http://localhost:8000/chatroom')
@@ -57,6 +70,18 @@ function ChatContainer() {
         console.error(err);
       });
   }, [currentUser]);
+
+  // all db calls for messages
+  useEffect(() => {
+    axios
+      .get(`http://localhost:8000/message/${currentRoomID}`)
+      .then((res) => {
+        if (res) {
+          setMessagesHistory(res.data);
+        }
+      })
+      .catch((e) => console.error(e));
+  }, [currentRoomID]);
 
   return (
     <div>
@@ -79,17 +104,19 @@ function ChatContainer() {
           </ListItem>
           <List>
             {chatrooms.map((chat) => (
-              <ListItem
-                button
-                key={chat._id}
-                onClick={(e) => {
-                  setChatRoom(e.target.value);
-                }}
-              >
+              <ListItem button key={chat._id}>
                 <ListItemIcon>
                   <Avatar alt={chat.name} src={chat.photo} />
                 </ListItemIcon>
-                <ListItemText primary={chat.name}>{chat.name}</ListItemText>
+                <ListItemText
+                  data-chat_id={chat._id}
+                  primary={chat.name}
+                  onClick={(e) => {
+                    setCurrentRoomID(e.currentTarget.dataset.chat_id);
+                  }}
+                >
+                  {chat.name}
+                </ListItemText>
               </ListItem>
             ))}
           </List>
