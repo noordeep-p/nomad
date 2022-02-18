@@ -1,5 +1,7 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable react/no-unescaped-entities */
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
@@ -9,9 +11,10 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import Avatar from '@material-ui/core/Avatar';
-import { Typography } from '@material-ui/core';
+import { Typography, TextField } from '@material-ui/core';
 import io from 'socket.io-client';
-import Convo from './Convo';
+import Fab from '@material-ui/core/Fab';
+import SendIcon from '@material-ui/icons/Send';
 
 const socket = io.connect('http://localhost:4000/');
 
@@ -35,11 +38,25 @@ const useStyles = makeStyles({
   },
 });
 const currentUser = localStorage.getItem('username');
+const currentUserID = localStorage.getItem('userID');
 
 function ChatContainer() {
   const classes = useStyles();
   const [user] = useState(currentUser);
-  const [chatroom, setChatRoom] = useState('Toronto');
+  const [chatroom, setChatRoom] = useState([]);
+
+  useEffect(() => {
+    axios
+      .get('http://localhost:8000/chatroom')
+      .then((res) => {
+        if (res) {
+          setChatRoom(res.data);
+        }
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  }, [currentUser]);
 
   return (
     <div>
@@ -61,117 +78,50 @@ function ChatContainer() {
             <Typography align="center">Chatrooms</Typography>
           </ListItem>
           <List>
-            <ListItem
-              button
-              key="Toronto"
-              onClick={(e) => {
-                setChatRoom(e.target.value);
-              }}
-            >
-              <ListItemIcon>
-                <Avatar
-                  alt="Toronto"
-                  src="https://images.unsplash.com/photo-1586576782138-19304c43d0e1?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80"
-                />
-              </ListItemIcon>
-              <ListItemText primary="Toronto">Toronto</ListItemText>
-            </ListItem>
-            <ListItem
-              button
-              key="Vancouver"
-              onClick={(e) => {
-                setChatRoom(e.target.value);
-              }}
-            >
-              <ListItemIcon>
-                <Avatar
-                  alt="Vancouver"
-                  src="https://images.unsplash.com/photo-1560814304-4f05b62af116?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1374&q=80"
-                />
-              </ListItemIcon>
-              <ListItemText primary="Vancouver">Vancouver</ListItemText>
-            </ListItem>
-            <ListItem
-              button
-              key="London"
-              onClick={(e) => {
-                setChatRoom(e.target.value);
-              }}
-            >
-              <ListItemIcon>
-                <Avatar
-                  alt="London"
-                  src="https://images.unsplash.com/photo-1494922275507-58dc039ed337?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80"
-                />
-              </ListItemIcon>
-              <ListItemText primary="London">London</ListItemText>
-            </ListItem>
-            <ListItem
-              button
-              key="Paris"
-              onClick={(e) => {
-                setChatRoom(e.target.value);
-              }}
-            >
-              <ListItemIcon>
-                <Avatar
-                  alt="Paris"
-                  src="https://images.unsplash.com/photo-1511739001486-6bfe10ce785f?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80"
-                />
-              </ListItemIcon>
-              <ListItemText primary="Paris">Paris</ListItemText>
-            </ListItem>
-            <ListItem
-              button
-              key="Moscow"
-              onClick={(e) => {
-                setChatRoom(e.target.value);
-              }}
-            >
-              <ListItemIcon>
-                <Avatar
-                  alt="Moscow"
-                  src="https://images.unsplash.com/photo-1596484552834-6a58f850e0a1?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80"
-                />
-              </ListItemIcon>
-              <ListItemText primary="Moscow">Moscow</ListItemText>
-            </ListItem>
-            <ListItem
-              button
-              key="Dubai"
-              onClick={(e) => {
-                setChatRoom(e.target.value);
-              }}
-            >
-              <ListItemIcon>
-                <Avatar
-                  alt="Dubai"
-                  src="https://images.unsplash.com/flagged/photo-1559717865-a99cac1c95d8?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2942&q=80"
-                />
-              </ListItemIcon>
-              <ListItemText primary="Dubai">Dubai</ListItemText>
-            </ListItem>
-            <ListItem
-              button
-              key="NewYork"
-              onClick={(e) => {
-                setChatRoom(e.target.value);
-              }}
-            >
-              <ListItemIcon>
-                <Avatar
-                  alt="New York"
-                  src="https://images.unsplash.com/photo-1499092346589-b9b6be3e94b2?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1471&q=80"
-                />
-              </ListItemIcon>
-              <ListItemText primary="New York">New York</ListItemText>
-            </ListItem>
+            {chatroom.map((chat) => (
+              <ListItem
+                button
+                key={chat.name}
+                onClick={(e) => {
+                  setChatRoom(e.target.value);
+                }}
+              >
+                <ListItemIcon>
+                  <Avatar alt={chat.name} src={chat.photo} />
+                </ListItemIcon>
+                <ListItemText primary={chat.name}>{chat.name}</ListItemText>
+              </ListItem>
+            ))}
           </List>
         </Grid>
         <Grid item xs={9}>
-          <List>
-            <Convo socket={socket} user={user} chatroom={chatroom} />
+          <List className={classes.messageArea}>
+            <ListItem key="1">
+              <Grid container>
+                <Grid item xs={12}>
+                  <ListItemText align="right" primary="Hey man, What's up ?" />
+                </Grid>
+                <Grid item xs={12}>
+                  <ListItemText align="right" secondary="09:30" />
+                </Grid>
+              </Grid>
+            </ListItem>
           </List>
+          <Divider />
+          <Grid container style={{ padding: '20px' }}>
+            <Grid item xs={11}>
+              <TextField
+                id="outlined-basic-email"
+                label="Type Something"
+                fullWidth
+              />
+            </Grid>
+            <Grid xs={1} align="right">
+              <Fab color="primary" aria-label="add">
+                <SendIcon />
+              </Fab>
+            </Grid>
+          </Grid>
         </Grid>
       </Grid>
     </div>
