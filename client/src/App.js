@@ -1,4 +1,5 @@
 import React from 'react';
+import axios from 'axios';
 import {
   BrowserRouter as Router,
   Switch,
@@ -12,6 +13,8 @@ import MapIndex from './components/Map/MapIndex';
 
 import useLocalStorage from './hooks/useLocalStorage';
 import { UserContext } from './userContext';
+
+axios.defaults.headers.authorization = localStorage.getItem('accessToken');
 
 export default function App() {
   const [accessToken, setAccessToken] = useLocalStorage('accessToken', null);
