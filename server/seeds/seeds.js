@@ -2,8 +2,11 @@ import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 import UserModel from '../models/users.js';
 import MapModel from '../models/maps.js';
+import ChatroomModel from '../models/chatroom.js';
+import MessageModel from '../models/messages.js';
 import { generateMaps, getMapIds } from './mapSeeds.js';
 import { generateUsers, getUserIds } from './userSeeds.js';
+import chatSeeds from './chatroomSeeds.js';
 
 const userIds = getUserIds();
 const mapIds = getMapIds();
@@ -28,8 +31,11 @@ mongoose
 Promise.all([
   UserModel.collection.drop(),
   MapModel.collection.drop(),
+  ChatroomModel.collection.drop(),
+  MessageModel.collection.drop(),
   UserModel.insertMany(userSeeds),
   MapModel.insertMany(mapSeeds),
+  ChatroomModel.insertMany(chatSeeds),
 ]).then(() => {
   mongoose.connection.close();
   console.log('Successfully seeded DB');
