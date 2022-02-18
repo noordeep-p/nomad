@@ -3,11 +3,13 @@
     "bgcolor",
     "Chatrooms",
     "Convo",
+    "datetime",
     "describedby",
     "formik",
     "labelledby",
     "rapidapi",
     "shorturl",
-    "testid"
+    "testid",
+    "timeago"
   ]
 }
