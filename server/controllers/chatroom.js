@@ -1,8 +1,9 @@
 import ChatroomModel from '../models/chatroom.js';
 
 export const createChatroom = async (req, res) => {
+  const { name, photo } = req.body;
   const newChatroom = new ChatroomModel(
-    { members: [req.body.senderID, req.body.receiverId] },
+    { name, photo },
   );
   try {
     const savedChatroom = await newChatroom.save();
