@@ -82,13 +82,13 @@ export const useStyles = makeStyles((theme) => ({
     cursor: 'pointer',
   },
   chip: {
-    margin: '5px 5px 5px 0',
+    margin: '3px 3px 3px 0',
   },
   subtitle: {
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'space-between',
-    marginTop: '10px',
+    marginTop: '5px',
   },
   spacing: {
     display: 'flex',
