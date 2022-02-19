@@ -37,10 +37,9 @@ export const createMaps = async (req, res) => {
 };
 
 export const updateMaps = async (req, res) => {
-  const { id: _id } = req.params;
-  const map = req.body;
-  if (!mongoose.Types.ObjectId.isValid(_id)) return res.status(404).json({ message: 'No map with that ID' });
-  const updatedMap = await MapModel.findByIdAndUpdate(_id, map, { new: true });
+  const map = await MapModel.findById(req.params.id);
+  if (!map) return res.status(404).json({ message: 'No map with that ID' });
+  const updatedMap = await map.updateOne({ $addToSet: { points: req.body.savedPins } });
   return res.status(201).json(updatedMap);
 };
 
