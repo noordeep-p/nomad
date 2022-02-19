@@ -15,6 +15,7 @@ import { Typography, TextField, Button } from '@material-ui/core';
 import ScrollToBottom from 'react-scroll-to-bottom';
 import { css } from 'glamor';
 import TimeAgo from 'timeago-react';
+import { io } from 'socket.io-client';
 import useStyles from './chatStyles';
 
 import NewChatModal from './NewChatModal';
@@ -22,6 +23,7 @@ import NewChatModal from './NewChatModal';
 const currentUser = localStorage.getItem('username');
 const currentUserID = localStorage.getItem('userID');
 
+let flag = 0;
 function ChatContainer() {
   // all chat styling
   const classes = useStyles();
@@ -29,6 +31,27 @@ function ChatContainer() {
     height: '70vh',
     width: '100%',
   });
+
+  // all socket hooks
+  const [updateChatroom, setUpdateChatroom] = useState(1);
+  const [updateMessages, setUpdateMessages] = useState(1);
+
+  const [socket, setSocket] = useState(null);
+
+  useEffect(() => {
+    setSocket(io('ws://localhost:4000'));
+  }, []);
+
+  useEffect(() => {
+    socket?.on('message', () => {
+      flag += 1;
+      setUpdateMessages(flag);
+    });
+    socket?.on('chat', () => {
+      flag += 1;
+      setUpdateChatroom(flag);
+    });
+  }, [socket]);
 
   // all chatrooms hooks
   const [user] = useState(currentUser);
@@ -53,6 +76,7 @@ function ChatContainer() {
           if (res) {
             setMessagesHistory((message) => [...message, messageInput]);
             setCurrentMessage('');
+            socket.emit('message');
           }
         })
         .catch((e) => console.error(e));
@@ -71,7 +95,7 @@ function ChatContainer() {
       .catch((err) => {
         console.error(err);
       });
-  }, [currentUser]);
+  }, [currentUser, updateChatroom]);
 
   // all db calls for messages
   useEffect(() => {
@@ -83,7 +107,7 @@ function ChatContainer() {
         }
       })
       .catch((e) => console.error(e));
-  }, [currentRoomID]);
+  }, [currentRoomID, updateMessages]);
 
   return (
     <div>
@@ -105,7 +129,7 @@ function ChatContainer() {
             <Typography align="center">Chatrooms</Typography>
           </ListItem>
           <ListItem align="center">
-            <NewChatModal />
+            <NewChatModal socket={socket} />
           </ListItem>
           <List>
             {chatrooms.map((chat) => (
