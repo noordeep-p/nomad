@@ -5,11 +5,19 @@ import mongoose from 'mongoose';
 import cors from 'cors';
 import dotenv from 'dotenv';
 
+import { Server } from 'socket.io';
 import chatroomRoutes from './routes/chatroom.js';
 import messageRoutes from './routes/message.js';
 import userRoutes from './routes/user.js';
 import mapRoutes from './routes/maps.js';
 import authenticateToken from './middleware/authentication.js';
+
+// Initialize socket.io
+const io = new Server(4000, {
+  cors: {
+    origin: 'http://localhost:3000',
+  },
+});
 
 // Middleware
 const app = express();
@@ -42,3 +50,17 @@ mongoose
   .catch((e) => {
     console.log(e.message);
   });
+
+// Start socket.io web socket connection
+io.on('connection', (socket) => {
+  console.log('a user connected.');
+  socket.on('message', () => {
+    socket.broadcast.emit('message', 'message');
+  });
+  socket.on('chat', () => {
+    socket.broadcast.emit('chat', 'chat');
+  });
+  socket.on('disconnect', () => {
+    console.log('a user disconnected!');
+  });
+});
