@@ -14,19 +14,44 @@ import Avatar from '@material-ui/core/Avatar';
 import { Typography, TextField, Button } from '@material-ui/core';
 import ScrollToBottom from 'react-scroll-to-bottom';
 import { css } from 'glamor';
-
+import TimeAgo from 'timeago-react';
+import { io } from 'socket.io-client';
 import useStyles from './chatStyles';
+
+import NewChatModal from './NewChatModal';
 
 const currentUser = localStorage.getItem('username');
 const currentUserID = localStorage.getItem('userID');
 
+let flag = 0;
 function ChatContainer() {
   // all chat styling
   const classes = useStyles();
   const ROOT_CSS = css({
-    height: 600,
+    height: '70vh',
     width: '100%',
   });
+
+  // all socket hooks
+  const [updateChatroom, setUpdateChatroom] = useState(1);
+  const [updateMessages, setUpdateMessages] = useState(1);
+
+  const [socket, setSocket] = useState(null);
+
+  useEffect(() => {
+    setSocket(io('ws://localhost:4000'));
+  }, []);
+
+  useEffect(() => {
+    socket?.on('message', () => {
+      flag += 1;
+      setUpdateMessages(flag);
+    });
+    socket?.on('chat', () => {
+      flag += 1;
+      setUpdateChatroom(flag);
+    });
+  }, [socket]);
 
   // all chatrooms hooks
   const [user] = useState(currentUser);
@@ -51,6 +76,7 @@ function ChatContainer() {
           if (res) {
             setMessagesHistory((message) => [...message, messageInput]);
             setCurrentMessage('');
+            socket.emit('message');
           }
         })
         .catch((e) => console.error(e));
@@ -69,7 +95,7 @@ function ChatContainer() {
       .catch((err) => {
         console.error(err);
       });
-  }, [currentUser]);
+  }, [currentUser, updateChatroom]);
 
   // all db calls for messages
   useEffect(() => {
@@ -81,7 +107,7 @@ function ChatContainer() {
         }
       })
       .catch((e) => console.error(e));
-  }, [currentRoomID]);
+  }, [currentRoomID, updateMessages]);
 
   return (
     <div>
@@ -101,6 +127,9 @@ function ChatContainer() {
           <Divider />
           <ListItem button key="Profile">
             <Typography align="center">Chatrooms</Typography>
+          </ListItem>
+          <ListItem align="center">
+            <NewChatModal socket={socket} />
           </ListItem>
           <List>
             {chatrooms.map((chat) => (
@@ -125,19 +154,20 @@ function ChatContainer() {
           <List className={classes.messageArea}>
             <ScrollToBottom className={ROOT_CSS}>
               <div style={{ height: 300, width: '100%' }}>
-                <List className="classes.messageBox">
+                <List>
                   {messagesHistory.map((msg) => (
                     <ListItem key={msg._id}>
-                      <Grid container>
+                      <Grid container className={classes.msgContainer}>
                         <Grid item xs={12}>
-                          <ListItemText align="right" primary={msg.text} />
+                          <ListItemText
+                            className={classes.chatBubble}
+                            align="right"
+                            primary={msg.text}
+                          />
                         </Grid>
                         <Grid item xs={12}>
                           <ListItemText align="right" secondary={msg.sender} />
-                          <ListItemText
-                            align="right"
-                            secondary={msg.timestamp}
-                          />
+                          <TimeAgo align="right" datetime={msg.createdAt} />
                         </Grid>
                       </Grid>
                     </ListItem>

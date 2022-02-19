@@ -21,7 +21,8 @@
     "express": "^4.17.2",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^6.1.10",
-    "nodemon": "^2.0.15"
+    "nodemon": "^2.0.15",
+    "socket.io": "^4.0.1"
   },
   "devDependencies": {
     "eslint": "^8.8.0",

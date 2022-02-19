@@ -18,4 +18,16 @@ export default makeStyles(() => ({
     height: '75vh',
     overflowY: 'auto',
   },
+  chatBubble: {
+    border: '0.5px solid black',
+    borderRadius: '10px',
+    margin: '5px',
+    padding: '10px',
+    width: 'fit-content',
+    alignSelf: 'flex-end',
+    display: 'inline-block',
+  },
+  msgContainer: {
+    textAlign: 'right',
+  },
 }));
