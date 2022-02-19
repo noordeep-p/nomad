@@ -20,7 +20,7 @@ import MenuIcon from '@material-ui/icons/Menu';
 import SearchIcon from '@material-ui/icons/Search';
 import LogoutIcon from '@mui/icons-material/Logout';
 import ChatIcon from '@mui/icons-material/Chat';
-import FavoriteIcon from '@mui/icons-material/Favorite';
+import TravelExploreIcon from '@mui/icons-material/TravelExplore';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 
 import NewMapModal from './NewMapModal';
@@ -32,8 +32,8 @@ export default function MainPage(props) {
   const classes = useStyles();
   const [mode, setMode] = useState('map');
   const content = {
-    link1: 'Explore',
-    link2: 'Your Favorites',
+    link1: 'Your Maps',
+    link2: 'Explore',
     link3: 'Chats',
     link4: 'Logout',
     ...props.content,
@@ -132,7 +132,7 @@ export default function MainPage(props) {
               }}
             >
               <ListItemIcon>
-                <FavoriteIcon />
+                <TravelExploreIcon />
               </ListItemIcon>
               <ListItemText primary={content.link2} />
             </ListItem>
@@ -187,7 +187,7 @@ export default function MainPage(props) {
               }}
             >
               <ListItemIcon>
-                <FavoriteIcon />
+                <TravelExploreIcon />
               </ListItemIcon>
               <ListItemText primary={content.link2} />
             </ListItem>
@@ -223,8 +223,9 @@ export default function MainPage(props) {
         <Toolbar />
         <div>
           {mode === 'map' && buckets.main.map((component) => <>{component}</>)}
-          {mode === 'favorite' && buckets.main.map((component) => <>{component}</>)}
-          {mode === 'chat' && (<ChatContainer />)}
+          {mode === 'favorite'
+            && buckets.main.map((component) => <>{component}</>)}
+          {mode === 'chat' && <ChatContainer />}
         </div>
       </main>
     </div>
