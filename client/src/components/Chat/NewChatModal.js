@@ -20,7 +20,7 @@ const style = {
   p: 4,
 };
 
-export default function NewChatModal() {
+export default function NewChatModal({ socket }) {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -28,7 +28,6 @@ export default function NewChatModal() {
   const handleNewChat = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    console.log(data.get('name'), data.get('photo'));
     axios
       .post('http://localhost:8000/chatroom', {
         name: data.get('name'),
@@ -36,7 +35,7 @@ export default function NewChatModal() {
       })
       .then((res) => {
         if (res) {
-          console.log(res.data);
+          socket.emit('chat');
         }
       })
       .catch((err) => {
