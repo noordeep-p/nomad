@@ -1,3 +1,4 @@
+/* eslint-disable no-underscore-dangle */
 import * as React from 'react';
 import axios from 'axios';
 import Backdrop from '@mui/material/Backdrop';
@@ -40,8 +41,8 @@ export default function NewMapModal() {
       })
       .then((res) => {
         if (res) {
-          console.log(res);
-          history.push('/map');
+          console.log(res.data._id);
+          history.push(`/map/${res.data._id}`);
         }
       })
       .catch((err) => {
