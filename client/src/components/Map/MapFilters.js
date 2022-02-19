@@ -28,7 +28,15 @@ export default function MapFilters({
   return (
     <div className={classes.root}>
       <AppBar position="fixed" className={classes.appBar}>
-        <Toolbar>
+        <Toolbar
+          style={{
+            color: 'white',
+            display: 'flex',
+            flexDirection: 'row',
+            justifyContent: 'flex-end',
+            alignItems: 'center',
+          }}
+        >
           <Link
             href="/"
             variant="h5"
@@ -51,10 +59,12 @@ export default function MapFilters({
             {' '}
             Nomad
           </Link>
-          <Typography variant="body1">Search Filters :</Typography>
+          <Typography variant="body1" style={{ alignSelf: 'flex-end', margin: '0.6rem' }}>Search Filters:</Typography>
           <div>
             <FormControl variant="standard" sx={{ m: 1, minWidth: 120 }}>
-              <InputLabel style={{ color: 'white' }} id="type">Type</InputLabel>
+              <InputLabel style={{ color: 'white' }} id="type">
+                Type
+              </InputLabel>
               <Select
                 id="type"
                 style={{ color: 'white' }}
@@ -67,8 +77,11 @@ export default function MapFilters({
               </Select>
             </FormControl>
             <FormControl variant="standard" sx={{ m: 1, minWidth: 120 }}>
-              <InputLabel style={{ color: 'white' }} id="rating">Rating</InputLabel>
+              <InputLabel style={{ color: 'white' }} id="rating">
+                Rating
+              </InputLabel>
               <Select
+                style={{ color: 'white' }}
                 id="rating"
                 value={rating}
                 onChange={(event) => setRating(event.target.value)}
@@ -80,10 +93,7 @@ export default function MapFilters({
               </Select>
             </FormControl>
           </div>
-          <Autocomplete
-            onLoad={onLoad}
-            onPlaceChanged={onPlaceChanged}
-          >
+          <Autocomplete onLoad={onLoad} onPlaceChanged={onPlaceChanged}>
             <div className={classes.search}>
               <div className={classes.searchIcon}>
                 <SearchIcon />
