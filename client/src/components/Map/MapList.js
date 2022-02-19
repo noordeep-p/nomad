@@ -5,7 +5,9 @@ import { CircularProgress, Grid, Typography } from '@material-ui/core';
 import PlaceDetails from './MapDetails';
 import { useStyles } from './MapStyles';
 
-export default function MapList({ places, childClicked, isLoading }) {
+export default function MapList({
+  places, childClicked, isLoading, setSavedPins,
+}) {
   const [elementRefs, setElementRefs] = useState([]);
   const classes = useStyles();
 
@@ -17,8 +19,8 @@ export default function MapList({ places, childClicked, isLoading }) {
 
   return (
     <div className={classes.container}>
-      <Typography variant="h5">
-        Click Add Pin To Add to Shared Itinerary
+      <Typography variant="h6" gutterBottom>
+        Add Places To Your Shared Itinerary
       </Typography>
       {isLoading ? (
         <div className={classes.loading}>
@@ -32,6 +34,7 @@ export default function MapList({ places, childClicked, isLoading }) {
                 selected={Number(childClicked) === i}
                 refProp={elementRefs[i]}
                 place={place}
+                setSavedPins={setSavedPins}
               />
             </Grid>
           ))}
