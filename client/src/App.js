@@ -44,7 +44,7 @@ export default function App() {
               <Redirect to="/login" />
             )}
           </Route>
-          <Route exact path="/map">
+          <Route exact path="/map/:mapId">
             {accessToken ? (
               <MapIndex currentUser={currentUser} />
             ) : (
