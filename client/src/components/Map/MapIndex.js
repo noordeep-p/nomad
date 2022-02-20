@@ -23,11 +23,9 @@ import MapList from './MapList';
 
 import { useStyles } from './MapStyles';
 
-const urlParams = window.location.pathname.slice(5);
-
 export default function MapIndex() {
+  const urlParams = window.location.pathname.slice(5);
   const history = useHistory();
-
   const classes = useStyles();
 
   // All Maps hooks //
