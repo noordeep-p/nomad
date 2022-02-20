@@ -1,7 +1,8 @@
 /* eslint-disable react/destructuring-assignment */
 /* eslint-disable react/jsx-no-useless-fragment */
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -25,10 +26,11 @@ import LocationOnIcon from '@mui/icons-material/LocationOn';
 
 import NewMapModal from './NewMapModal';
 import ChatContainer from '../Chat/ChatContainer';
+import MapCard from './MapCard';
 
 import useStyles from './StylesMain';
 
-export default function MainPage(props) {
+export default function MainPage({ setAccessToken }) {
   const classes = useStyles();
   const [mode, setMode] = useState('map');
   const content = {
@@ -36,12 +38,26 @@ export default function MainPage(props) {
     link2: 'Explore',
     link3: 'Chats',
     link4: 'Logout',
-    ...props.content,
   };
 
-  const buckets = {
-    main: Array.isArray(props.bucketMain) ? props.bucketMain : [],
-  };
+  const currentUserID = localStorage.getItem('userId');
+  const [maps, setMaps] = useState({
+    allMaps: [],
+    userMaps: [],
+  });
+
+  useEffect(() => {
+    Promise.all([
+      axios.get('http://localhost:8000/maps'),
+      axios.get(`http://localhost:8000/maps/user/${currentUserID}`),
+    ]).then((all) => {
+      setMaps((prev) => ({
+        ...prev,
+        allMaps: all[0].data,
+        userMaps: all[1].data,
+      }));
+    });
+  }, [mode]);
 
   const [state, setState] = React.useState({ open: false });
 
@@ -128,7 +144,7 @@ export default function MainPage(props) {
               button
               key={content.link2}
               onClick={() => {
-                visualMode('favorite');
+                visualMode('allMap');
               }}
             >
               <ListItemIcon>
@@ -152,7 +168,7 @@ export default function MainPage(props) {
               button
               key={content.link4}
               onClick={() => {
-                props.setAccessToken(null);
+                setAccessToken(null);
                 localStorage.clear();
               }}
             >
@@ -183,7 +199,7 @@ export default function MainPage(props) {
               button
               key={content.link2}
               onClick={() => {
-                visualMode('favorite');
+                visualMode('allMap');
               }}
             >
               <ListItemIcon>
@@ -207,7 +223,7 @@ export default function MainPage(props) {
               button
               key={content.link4}
               onClick={() => {
-                props.setAccessToken(null);
+                setAccessToken(null);
                 localStorage.clear();
               }}
             >
@@ -222,9 +238,12 @@ export default function MainPage(props) {
       <main className={classes.content}>
         <Toolbar />
         <div>
-          {mode === 'map' && buckets.main.map((component) => <>{component}</>)}
-          {mode === 'favorite'
-            && buckets.main.map((component) => <>{component}</>)}
+          {mode === 'allMap' && (
+            <MapCard
+              cards={maps.allMaps.filter((map) => map.owner !== currentUserID)}
+            />
+          )}
+          {mode === 'map' && <MapCard cards={maps.userMaps} />}
           {mode === 'chat' && <ChatContainer />}
         </div>
       </main>
