@@ -1,3 +1,5 @@
+/* eslint-disable no-underscore-dangle */
+/* eslint-disable no-undef */
 /* eslint-disable react/destructuring-assignment */
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
@@ -32,106 +34,94 @@ const useStyles = makeStyles((theme) => ({
 
 export default function MapCard(props) {
   const classes = useStyles();
-
-  const content = {
-    '02_header': 'The title of the shared itinerary will go here.',
-    '02_description':
-      'This is the placeholder for the description for the specific shared itinerary',
-    'primary-action': 'View this itinerary',
-    image1:
-      'https://images.unsplash.com/photo-1503220317375-aaad61436b1b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80',
-    image2:
-      'https://images.unsplash.com/photo-1488085061387-422e29b40080?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1931&q=80',
-    image3:
-      'https://images.unsplash.com/photo-1501785888041-af3ef285b470?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80',
-    image4:
-      'https://images.unsplash.com/photo-1523906834658-6e24ef2386f9?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=683&q=80',
-    ...props.content,
-  };
-
+  const mapCards = props.cards.reverse();
   return (
-    <section>
-      <Container maxWidth="lg">
-        <Box pt={8} pb={10}>
-          <Grid container>
-            <Grid item xs={12} lg={6} className={classes.firstColumn}>
-              <Card className={classes.info}>
-                <CardContent className={classes.info}>
-                  <Box
-                    display="flex"
-                    flexDirection="column"
-                    height="100%"
-                    pt={2}
-                    px={2}
-                  >
-                    <Typography variant="h5" component="h2" gutterBottom>
-                      {content['02_header']}
-                    </Typography>
-                    <Box mt="auto" mb={2}>
-                      <Typography
-                        variant="body1"
-                        component="p"
-                        color="textSecondary"
-                      >
-                        {content['02_description']}
+    mapCards.map((card) => (
+      <section key={card._id}>
+        <Container maxWidth="lg">
+          <Box pt={8} pb={10}>
+            <Grid container>
+              <Grid item xs={12} lg={6} className={classes.firstColumn}>
+                <Card className={classes.info}>
+                  <CardContent className={classes.info}>
+                    <Box
+                      display="flex"
+                      flexDirection="column"
+                      height="100%"
+                      pt={2}
+                      px={2}
+                    >
+                      <Typography variant="h5" component="h2" gutterBottom>
+                        {card.title}
                       </Typography>
+                      <Box mt="auto" mb={2}>
+                        <Typography
+                          variant="body1"
+                          component="p"
+                          color="textSecondary"
+                        >
+                          {card.description}
+                        </Typography>
+                      </Box>
+                      <Box textAlign="right">
+                        <Button color="primary" endIcon={<ArrowRightAltIcon />}>
+                          View this itinerary
+                        </Button>
+                      </Box>
                     </Box>
-                    <Box textAlign="right">
-                      <Button color="primary" endIcon={<ArrowRightAltIcon />}>
-                        {content['primary-action']}
-                      </Button>
-                    </Box>
-                  </Box>
-                </CardContent>
-              </Card>
-            </Grid>
-            <Grid item xs={12} lg={6}>
-              <Grid container spacing={2}>
-                <Grid item xs={12} md={8}>
-                  <Card>
-                    <CardActionArea href="#">
-                      <CardMedia
-                        className={classes.media}
-                        image={content.image1}
-                      />
-                    </CardActionArea>
-                  </Card>
-                </Grid>
-                <Grid item xs={12} md={4}>
-                  <Card>
-                    <CardActionArea href="#">
-                      <CardMedia
-                        className={classes.media}
-                        image={content.image2}
-                      />
-                    </CardActionArea>
-                  </Card>
-                </Grid>
-                <Grid item xs={12} md={4}>
-                  <Card>
-                    <CardActionArea href="#">
-                      <CardMedia
-                        className={classes.media}
-                        image={content.image3}
-                      />
-                    </CardActionArea>
-                  </Card>
-                </Grid>
-                <Grid item xs={12} md={8}>
-                  <Card>
-                    <CardActionArea href="#">
-                      <CardMedia
-                        className={classes.media}
-                        image={content.image4}
-                      />
-                    </CardActionArea>
-                  </Card>
+                  </CardContent>
+                </Card>
+              </Grid>
+              <Grid item xs={12} lg={6}>
+                <Grid container spacing={2}>
+                  <Grid item xs={12} md={8}>
+                    <Card>
+                      <CardActionArea href="#">
+                        <CardMedia
+                          className={classes.media}
+                          image="https://wttc.org/DesktopModules/MVC/NewsArticleList/images/141_20201013185512_Consumer%20Survey%20Finds%2070%20Percent%20of%20Travelers%20Plan%20to%20Holiday%20in%202021.jpg"
+                        />
+                      </CardActionArea>
+                    </Card>
+                  </Grid>
+                  <Grid item xs={12} md={4}>
+                    <Card>
+                      <CardActionArea href="#">
+                        <CardMedia
+                          className={classes.media}
+                          image="https://wttc.org/DesktopModules/MVC/NewsArticleList/images/141_20201013185512_Consumer%20Survey%20Finds%2070%20Percent%20of%20Travelers%20Plan%20to%20Holiday%20in%202021.jpg"
+                          alt="img"
+                        />
+                      </CardActionArea>
+                    </Card>
+                  </Grid>
+                  <Grid item xs={12} md={4}>
+                    <Card>
+                      <CardActionArea href="#">
+                        <CardMedia
+                          className={classes.media}
+                          image="https://wttc.org/DesktopModules/MVC/NewsArticleList/images/141_20201013185512_Consumer%20Survey%20Finds%2070%20Percent%20of%20Travelers%20Plan%20to%20Holiday%20in%202021.jpg"
+                          alt="imag"
+                        />
+                      </CardActionArea>
+                    </Card>
+                  </Grid>
+                  <Grid item xs={12} md={8}>
+                    <Card>
+                      <CardActionArea href="#">
+                        <CardMedia
+                          className={classes.media}
+                          image="https://wttc.org/DesktopModules/MVC/NewsArticleList/images/141_20201013185512_Consumer%20Survey%20Finds%2070%20Percent%20of%20Travelers%20Plan%20to%20Holiday%20in%202021.jpg"
+                        />
+                      </CardActionArea>
+                    </Card>
+                  </Grid>
                 </Grid>
               </Grid>
             </Grid>
-          </Grid>
-        </Box>
-      </Container>
-    </section>
+          </Box>
+        </Container>
+      </section>
+    ))
   );
 }
