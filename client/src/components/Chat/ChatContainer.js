@@ -21,7 +21,7 @@ import useStyles from './chatStyles';
 import NewChatModal from './NewChatModal';
 
 const currentUser = localStorage.getItem('username');
-const currentUserID = localStorage.getItem('userID');
+const currentUserID = localStorage.getItem('userId');
 
 let flag = 0;
 function ChatContainer() {
