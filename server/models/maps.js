@@ -20,7 +20,7 @@ const mapSchema = mongoose.Schema({
     type: Array,
     default: [],
   },
-});
+}, { timestamps: true });
 
 const MapModel = mongoose.model('MapModel', mapSchema);
 
