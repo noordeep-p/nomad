@@ -7,7 +7,6 @@ import {
   Redirect,
 } from 'react-router-dom';
 import MainPage from './components/Content/MainPage';
-import MapCard from './components/Content/MapCard';
 import UserAuth from './components/Content/UserAuth';
 import MapIndex from './components/Map/MapIndex';
 
@@ -32,13 +31,6 @@ export default function App() {
               <MainPage
                 setAccessToken={setAccessToken}
                 currentUser={currentUser}
-                bucketMain={[
-                  <MapCard
-                    content={{
-                      'primary-action': 'View this itinerary',
-                    }}
-                  />,
-                ]}
               />
             ) : (
               <Redirect to="/login" />
