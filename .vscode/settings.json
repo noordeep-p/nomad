@@ -7,6 +7,8 @@
     "describedby",
     "formik",
     "labelledby",
+    "mapid",
+    "mapview",
     "rapidapi",
     "shorturl",
     "testid",
