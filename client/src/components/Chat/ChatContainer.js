@@ -1,8 +1,6 @@
-/* eslint-disable no-unused-vars */
 /* eslint-disable no-underscore-dangle */
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import Divider from '@material-ui/core/Divider';
@@ -20,11 +18,10 @@ import useStyles from './chatStyles';
 
 import NewChatModal from './NewChatModal';
 
-const currentUser = localStorage.getItem('username');
-const currentUserID = localStorage.getItem('userId');
-
 let flag = 0;
+
 function ChatContainer() {
+  const currentUser = localStorage.getItem('username');
   // all chat styling
   const classes = useStyles();
   const ROOT_CSS = css({
@@ -167,7 +164,11 @@ function ChatContainer() {
                         </Grid>
                         <Grid item xs={12}>
                           <ListItemText align="right" secondary={msg.sender} />
-                          <TimeAgo align="right" datetime={msg.createdAt} />
+                          <TimeAgo
+                            align="right"
+                            datetime={msg.createdAt}
+                            minPeriod={120}
+                          />
                         </Grid>
                       </Grid>
                     </ListItem>
