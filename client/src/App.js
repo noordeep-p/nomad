@@ -11,6 +11,7 @@ import { MapContext } from './mapContext';
 import MainPage from './components/Content/MainPage';
 import UserAuth from './components/Content/UserAuth';
 import MapIndex from './components/Map/MapIndex';
+import MapView from './components/Map/MapView';
 
 import useLocalStorage from './hooks/useLocalStorage';
 
@@ -44,6 +45,9 @@ export default function App() {
               ) : (
                 <Redirect to="/login" />
               )}
+            </Route>
+            <Route exact path="/mapview/:mapId">
+              {accessToken ? <MapView /> : <Redirect to="/login" />}
             </Route>
           </Switch>
         </Router>
