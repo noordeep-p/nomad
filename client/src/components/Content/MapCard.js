@@ -15,6 +15,8 @@ import CardActionArea from '@material-ui/core/CardActionArea';
 import CardMedia from '@material-ui/core/CardMedia';
 import CardContent from '@material-ui/core/CardContent';
 
+import { useHistory } from 'react-router-dom';
+
 const useStyles = makeStyles((theme) => ({
   info: {
     height: '100%',
@@ -33,6 +35,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function MapCard(props) {
+  const history = useHistory();
   const classes = useStyles();
   const mapCards = props.cards.reverse();
   const fillerImg = 'https://wttc.org/DesktopModules/MVC/NewsArticleList/images/141_20201013185512_Consumer%20Survey%20Finds%2070%20Percent%20of%20Travelers%20Plan%20to%20Holiday%20in%202021.jpg';
@@ -64,7 +67,16 @@ export default function MapCard(props) {
                       </Typography>
                     </Box>
                     <Box textAlign="right">
-                      <Button color="primary" endIcon={<ArrowRightAltIcon />}>
+                      <Button
+                        color="primary"
+                        data-mapid={card._id}
+                        endIcon={<ArrowRightAltIcon />}
+                        onClick={(e) => {
+                          history.push(
+                            `/mapview/${e.currentTarget.dataset.mapid}`,
+                          );
+                        }}
+                      >
                         View this itinerary
                       </Button>
                     </Box>
