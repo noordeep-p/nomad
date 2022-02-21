@@ -34,9 +34,9 @@ const useStyles = makeStyles((theme) => ({
 
 export default function MapCard(props) {
   const classes = useStyles();
-  const cards = props.cards.reverse();
+  const mapCards = props.cards.reverse();
   const fillerImg = 'https://wttc.org/DesktopModules/MVC/NewsArticleList/images/141_20201013185512_Consumer%20Survey%20Finds%2070%20Percent%20of%20Travelers%20Plan%20to%20Holiday%20in%202021.jpg';
-  return cards.map((card) => (
+  return mapCards.map((card) => (
     <section key={card._id}>
       <Container maxWidth="lg">
         <Box pt={8} pb={10}>
@@ -80,7 +80,7 @@ export default function MapCard(props) {
                       <CardMedia
                         className={classes.media}
                         image={
-                          card.points[0].photo
+                          card.points[0]?.photo
                             ? card.points[0].photo
                             : fillerImg
                         }
@@ -94,7 +94,7 @@ export default function MapCard(props) {
                       <CardMedia
                         className={classes.media}
                         image={
-                          card.points[1].photo
+                          card.points[1]?.photo
                             ? card.points[1].photo
                             : fillerImg
                         }
@@ -109,7 +109,7 @@ export default function MapCard(props) {
                       <CardMedia
                         className={classes.media}
                         image={
-                          card.points[2].photo
+                          card.points[2]?.photo
                             ? card.points[2].photo
                             : fillerImg
                         }
@@ -124,7 +124,7 @@ export default function MapCard(props) {
                       <CardMedia
                         className={classes.media}
                         image={
-                          card.points[3].photo
+                          card.points[3]?.photo
                             ? card.points[3].photo
                             : fillerImg
                         }
