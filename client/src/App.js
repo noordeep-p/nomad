@@ -11,8 +11,8 @@ import UserAuth from './components/Content/UserAuth';
 import MapIndex from './components/Map/MapIndex';
 
 import useLocalStorage from './hooks/useLocalStorage';
-import { UserContext } from './userContext';
-import { MapContext } from './mapContext';
+import { UserContext } from './context/userContext';
+import { MapContext } from './context/mapContext';
 
 axios.defaults.headers.authorization = localStorage.getItem('accessToken');
 
