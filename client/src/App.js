@@ -12,6 +12,7 @@ import MapIndex from './components/Map/MapIndex';
 
 import useLocalStorage from './hooks/useLocalStorage';
 import { UserContext } from './userContext';
+import { MapContext } from './mapContext';
 
 axios.defaults.headers.authorization = localStorage.getItem('accessToken');
 
@@ -21,30 +22,32 @@ export default function App() {
 
   return (
     <UserContext>
-      <Router>
-        <Switch>
-          <Route exact path="/login">
-            <UserAuth setAccessToken={setAccessToken} />
-          </Route>
-          <Route exact path="/">
-            {accessToken ? (
-              <MainPage
-                setAccessToken={setAccessToken}
-                currentUser={currentUser}
-              />
-            ) : (
-              <Redirect to="/login" />
-            )}
-          </Route>
-          <Route exact path="/map/:mapId">
-            {accessToken ? (
-              <MapIndex currentUser={currentUser} />
-            ) : (
-              <Redirect to="/login" />
-            )}
-          </Route>
-        </Switch>
-      </Router>
+      <MapContext>
+        <Router>
+          <Switch>
+            <Route exact path="/login">
+              <UserAuth setAccessToken={setAccessToken} />
+            </Route>
+            <Route exact path="/">
+              {accessToken ? (
+                <MainPage
+                  setAccessToken={setAccessToken}
+                  currentUser={currentUser}
+                />
+              ) : (
+                <Redirect to="/login" />
+              )}
+            </Route>
+            <Route exact path="/map/:mapId">
+              {accessToken ? (
+                <MapIndex currentUser={currentUser} />
+              ) : (
+                <Redirect to="/login" />
+              )}
+            </Route>
+          </Switch>
+        </Router>
+      </MapContext>
     </UserContext>
   );
 }
