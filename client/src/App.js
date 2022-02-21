@@ -6,13 +6,13 @@ import {
   Route,
   Redirect,
 } from 'react-router-dom';
+import { UserContext } from './userContext';
+import { MapContext } from './mapContext';
 import MainPage from './components/Content/MainPage';
 import UserAuth from './components/Content/UserAuth';
 import MapIndex from './components/Map/MapIndex';
 
 import useLocalStorage from './hooks/useLocalStorage';
-import { UserContext } from './context/userContext';
-import { MapContext } from './context/mapContext';
 
 axios.defaults.headers.authorization = localStorage.getItem('accessToken');
 
