@@ -167,7 +167,7 @@ function ChatContainer() {
                           <TimeAgo
                             align="right"
                             datetime={msg.createdAt}
-                            minPeriod={120}
+                            live={false}
                           />
                         </Grid>
                       </Grid>
