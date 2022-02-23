@@ -23,7 +23,7 @@ function generateMaps(mapIds, userArr) {
 
 function getMapIds() {
   const idArray = [];
-  for (let i = 0; i < 20; i += 1) {
+  for (let i = 0; i < 5; i += 1) {
     idArray.push(new mongoose.Types.ObjectId());
   }
   return idArray;

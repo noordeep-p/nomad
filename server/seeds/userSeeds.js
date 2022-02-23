@@ -22,7 +22,7 @@ function generateUsers(usersArr) {
 // Generate array of mongoose userIds
 function getUserIds() {
   const idArray = [];
-  for (let i = 0; i < 5; i += 1) {
+  for (let i = 0; i < 2; i += 1) {
     idArray.push(new mongoose.Types.ObjectId());
   }
   return idArray;
