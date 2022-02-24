@@ -13,9 +13,17 @@ Nomad is a travel app that allows travellers to share their itineraries and visi
 - Users can chat with people that accept their buddy request
 - Users have a meetup feature where they that can request to chat and meetup with others called “find a travel buddy”
 
-## Dependencies
+## App Features Demo
 
----
+<p align='center'>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/T5WFGQWtRPo" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</p>
+
+<p align='center'>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/ks9lEPx_sRM" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</p>
+
+## Dependencies
 
 - node: ^10.x,
 - npm: ^5.x,
@@ -35,8 +43,6 @@ Nomad is a travel app that allows travellers to share their itineraries and visi
 - bcrypt: ^5.0.1
 
 ## Dev Dependencies
-
----
 
 - nodemon: ^2.0.10
 - eslint: ^8.8.0,
