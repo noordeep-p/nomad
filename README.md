@@ -15,9 +15,9 @@ Nomad is a travel app that allows travellers to share their itineraries and visi
 
 ## App Features Demo
 
-[![Nomad Virtual Itineraries Demo](http://img.youtube.com/vi/T5WFGQWtRPo/0.jpg)](https://www.youtube.com/watch?v=T5WFGQWtRPo&ab_channel=NoordeepP. "Nomad Virtual Itineraries Demo")
+[![Nomad Virtual Itineraries Demo](http://img.youtube.com/vi/T5WFGQWtRPo/1.jpg)](https://www.youtube.com/watch?v=T5WFGQWtRPo&ab_channel=NoordeepP. "Nomad Virtual Itineraries Demo")
 
-[![Nomad Chat Demo](http://img.youtube.com/vi/T5WFGQWtRPo/0.jpg)](https://www.youtube.com/watch?v=ks9lEPx_sRM&ab_channel=NoordeepP. "Nomad Chat Demo")
+[![Nomad Chat Demo](http://img.youtube.com/vi/ks9lEPx_sRM/1.jpg)](https://www.youtube.com/watch?v=ks9lEPx_sRM&ab_channel=NoordeepP. "Nomad Chat Demo")
 
 ## Dependencies
 
